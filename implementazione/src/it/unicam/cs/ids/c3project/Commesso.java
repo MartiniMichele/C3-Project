@@ -8,8 +8,8 @@ import java.util.Objects;
  */
 public class Commesso implements Personale {
 
-    static int ID = 0;
-    String nome;
+    protected static int ID = 0;
+    protected String nome;
 
     Commesso(String nome) {
         ID++;

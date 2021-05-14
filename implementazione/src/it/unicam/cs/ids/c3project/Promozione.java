@@ -6,10 +6,10 @@ import java.util.Objects;
  * Classe che ha il compito di rappresentare una promozione per un negozio
  */
 public class Promozione {
-    String nome;
-    static int ID = 0;
-    String negozio;
-    int puntiBonus;
+    private String nome;
+    private static int ID = 0;
+    private String negozio;
+    private int puntiBonus;
 
     Promozione(String nome, String negozio, int puntiBonus) {
         ID++;

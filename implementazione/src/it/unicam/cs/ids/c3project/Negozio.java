@@ -9,13 +9,13 @@ import java.util.Objects;
  */
 public class Negozio {
 
-    String nome;
-    Responsabile responsabile;
-    String indirizzo;
-    String tipologia;
-    List<Personale> personale;
-    List<Promozione> promozioni;
-    List<String> categorie;
+    private String nome;
+    private Responsabile responsabile;
+    private String indirizzo;
+    private String tipologia;
+    private List<Personale> personale;
+    private List<Promozione> promozioni;
+    private List<String> categorie;
 
     Negozio(String nome, String indirizzo, String tipologia, List<Personale> personale, List<Promozione> promozioni, List<String> categorie) {
 
@@ -74,15 +74,27 @@ public class Negozio {
     }
 
     public void addPromozione(Promozione promozione) {
+
+        if (!promozioneDuplicata(promozione.getID()))
         this.promozioni.add(promozione);
+
+        else throw new IllegalArgumentException();
     }
 
     public List<String> getcategorie() {
         return categorie;
     }
 
-    public void addcategoria(String categoria) {
+    public void addCategoria(String categoria) {
         this.categorie.add(categoria);
+    }
+
+    public boolean contieneCategoria(String categoria) {
+        return categorie.contains(categoria);
+    }
+
+    public boolean contienePromozione(Promozione promozione) {
+        return promozioni.contains(promozione);
     }
 
     /**
@@ -92,7 +104,6 @@ public class Negozio {
      */
     private Responsabile obtainResponsabile(List<Personale> personale) {
 
-        Iterator<Personale> iterator = personale.iterator();
         Personale responsabile = null;
 
         for (Personale elemento : personale) {
@@ -103,6 +114,21 @@ public class Negozio {
         }
 
         return  (Responsabile) responsabile;
+    }
+
+    private boolean promozioneDuplicata(int ID) {
+
+        boolean result = false;
+
+        for (Promozione elemento : promozioni) {
+
+            if (elemento.getID() == ID) {
+                result = true;
+                break;
+            }
+        }
+
+        return  result;
     }
 
     @Override

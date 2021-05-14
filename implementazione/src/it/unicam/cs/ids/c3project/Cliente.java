@@ -1,0 +1,54 @@
+package it.unicam.cs.ids.c3project;
+
+import java.util.List;
+
+public class Cliente {
+
+    private String username;
+    private int saldoPunti;
+    private String indirizzo;
+    private List<Negozio> preferiti;
+
+    Cliente(String username, int saldoPunti, String indirizzo){
+
+        this.username = username;
+        this.saldoPunti = saldoPunti;
+        this.indirizzo = indirizzo;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public int getSaldoPunti() {
+        return saldoPunti;
+    }
+
+    public void setSaldoPunti(int saldoPunti) {
+        this.saldoPunti = saldoPunti;
+    }
+
+    public String getIndirizzo() {
+        return indirizzo;
+    }
+
+    public void setIndirizzo(String indirizzo) {
+        this.indirizzo = indirizzo;
+    }
+
+    public List<Negozio> getPreferiti() {
+        return preferiti;
+    }
+
+    public void addPreferito(Negozio negozio) {
+        this.preferiti.add(negozio);
+    }
+
+    public boolean contienePreferito(Negozio negozio) {
+        return preferiti.contains(negozio);
+    }
+}
