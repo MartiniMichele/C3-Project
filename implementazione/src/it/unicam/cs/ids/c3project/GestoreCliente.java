@@ -37,7 +37,7 @@ public class GestoreCliente implements GestoreClienteInterface {
     }
 
     @Override
-    public boolean addPreferity(String cliente, Negozio negozio) {
+    public boolean addPreferiti(String cliente, Negozio negozio) {
 
         Cliente istanzaCliente = searchCliente(cliente);
         istanzaCliente.addPreferito(negozio);

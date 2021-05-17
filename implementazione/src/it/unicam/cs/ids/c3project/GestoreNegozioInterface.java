@@ -8,6 +8,6 @@ public interface GestoreNegozioInterface {
     boolean rimuoviCategoria(String categoria, String negozio);
     List<String> getCategorie(String negozio);
     boolean avviaPromozione(String nome, String negozio, int puntiBonus);
-    boolean addNegozio(String nome, String indirizzo, String tipologia, List<Personale> personale, List<Promozione> promozioni, List<String> categorie);
+    boolean creaNegozio(String nome, String indirizzo, String tipologia, List<Personale> personale, List<Promozione> promozioni, List<String> categorie);
 
 }

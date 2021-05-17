@@ -53,6 +53,7 @@ public class GestoreNegozio implements GestoreNegozioInterface {
         return !negozi.contains(istanzaNegozio);
     }
 
+    //TODO RIMUOVERE
     @Override
     public List<String> getCategorie(String negozio) {
         //aggiungere controlli
@@ -74,7 +75,7 @@ public class GestoreNegozio implements GestoreNegozioInterface {
     }
 
     @Override
-    public boolean addNegozio(String nome, String indirizzo, String tipologia, List<Personale> personale, List<Promozione> promozioni, List<String> categorie) {
+    public boolean creaNegozio(String nome, String indirizzo, String tipologia, List<Personale> personale, List<Promozione> promozioni, List<String> categorie) {
         //aggiungere controllo se già esistente
 
         boolean flag = negozioEsistente(nome);
