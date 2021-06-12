@@ -1,5 +1,9 @@
-package it.unicam.cs.ids.c3project;
+package it.unicam.cs.ids.c3project.cliente;
 
+import it.unicam.cs.ids.c3project.contenuto.Pacco;
+import it.unicam.cs.ids.c3project.negozio.Negozio;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente {
@@ -8,12 +12,13 @@ public class Cliente {
     private int saldoPunti;
     private String indirizzo;
     private List<Negozio> preferiti;
-
-    Cliente(String username, int saldoPunti, String indirizzo){
-
+    private List<Pacco> ordiniEffettuati;
+    public Cliente(String username, int saldoPunti, String indirizzo){
         this.username = username;
         this.saldoPunti = saldoPunti;
         this.indirizzo = indirizzo;
+        this.preferiti=new ArrayList<>();
+        this.ordiniEffettuati=new ArrayList<>();
     }
 
     public String getUsername() {
@@ -50,5 +55,10 @@ public class Cliente {
 
     public boolean contienePreferito(Negozio negozio) {
         return preferiti.contains(negozio);
+    }
+
+    public void aggiungiPaccoAtteso(int id){
+
+        //this.ordiniEffettuati.add();
     }
 }

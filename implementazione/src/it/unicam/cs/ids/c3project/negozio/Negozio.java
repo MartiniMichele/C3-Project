@@ -1,6 +1,8 @@
-package it.unicam.cs.ids.c3project;
+package it.unicam.cs.ids.c3project.negozio;
 
-import java.util.Iterator;
+import it.unicam.cs.ids.c3project.cliente.Personale;
+import it.unicam.cs.ids.c3project.cliente.Responsabile;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -11,14 +13,14 @@ public class Negozio {
 
     private String nome;
     private Responsabile responsabile;
+    private Vetrina vetrina;
     private String indirizzo;
     private String tipologia;
     private List<Personale> personale;
     private List<Promozione> promozioni;
     private List<String> categorie;
 
-    Negozio(String nome, String indirizzo, String tipologia, List<Personale> personale, List<Promozione> promozioni, List<String> categorie) {
-
+   public Negozio(String nome, String indirizzo, String tipologia, List<Personale> personale, List<Promozione> promozioni, List<String> categorie) {
         this.nome = nome;
         this.responsabile = obtainResponsabile(personale);
         this.indirizzo = indirizzo;
@@ -129,6 +131,9 @@ public class Negozio {
         }
 
         return  result;
+    }
+    public void creaVetrina(String nome, String tipologia, String indirizzo, String contatto){
+        Vetrina vetrina=new Vetrina(nome, indirizzo, tipologia, contatto);
     }
 
     @Override

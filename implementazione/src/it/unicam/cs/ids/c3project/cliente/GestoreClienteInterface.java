@@ -1,4 +1,6 @@
-package it.unicam.cs.ids.c3project;
+package it.unicam.cs.ids.c3project.cliente;
+
+import it.unicam.cs.ids.c3project.negozio.Negozio;
 
 public interface GestoreClienteInterface {
 

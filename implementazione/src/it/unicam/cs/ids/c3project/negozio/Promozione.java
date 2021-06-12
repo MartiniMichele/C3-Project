@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.c3project;
+package it.unicam.cs.ids.c3project.negozio;
 
 import java.util.Objects;
 
@@ -11,7 +11,7 @@ public class Promozione {
     private String negozio;
     private int puntiBonus;
 
-    Promozione(String nome, String negozio, int puntiBonus) {
+   public Promozione(String nome, String negozio, int puntiBonus) {
         ID++;
         this.nome = nome;
         this.negozio = negozio;

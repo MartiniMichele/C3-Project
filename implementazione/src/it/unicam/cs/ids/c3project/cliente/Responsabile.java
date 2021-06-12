@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.c3project;
+package it.unicam.cs.ids.c3project.cliente;
 
 /**
  * classe che ha il compito di rappresentare un responsabile

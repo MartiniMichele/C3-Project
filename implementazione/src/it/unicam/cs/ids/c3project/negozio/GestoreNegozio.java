@@ -1,4 +1,6 @@
-package it.unicam.cs.ids.c3project;
+package it.unicam.cs.ids.c3project.negozio;
+
+import it.unicam.cs.ids.c3project.cliente.Personale;
 
 import java.util.ArrayList;
 import java.util.List;
