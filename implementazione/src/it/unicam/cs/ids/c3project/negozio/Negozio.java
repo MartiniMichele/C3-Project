@@ -11,31 +11,22 @@ import java.util.Objects;
  */
 public class Negozio {
 
-    private String nome;
+    private int id;
     private Responsabile responsabile;
-    private String indirizzo;
-    private String tipologia;
     private Vetrina vetrina;
     private List<Personale> personale;
-    private List<Promozione> promozioni;
-    private List<String> categorie;
 
-   public Negozio(String tipologia, List<Personale> personale, List<String> categorie) {
+   public Negozio(Responsabile responsabile, List<Personale> personale ) {
         this.responsabile = obtainResponsabile(personale);
-        this.tipologia = tipologia;
         this.personale = personale;
-        this.categorie = categorie;
-
     }
 
-
-
-    public String getNome() {
-        return nome;
+    public int getId() {
+        return id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public Vetrina getVetrina() {
+        return vetrina;
     }
 
     public Responsabile getResponsabile() {
@@ -46,21 +37,7 @@ public class Negozio {
         this.responsabile = responsabile;
     }
 
-    public String getIndirizzo() {
-        return indirizzo;
-    }
 
-    public void setIndirizzo(String indirizzo) {
-        this.indirizzo = indirizzo;
-    }
-
-    public String getTipologia() {
-        return tipologia;
-    }
-
-    public void setTipologia(String tipologia) {
-        this.tipologia = tipologia;
-    }
 
     public List<Personale> getPersonale() {
         return personale;
@@ -70,7 +47,7 @@ public class Negozio {
         this.personale.add(personale);
     }
 
-    public List<Promozione> getPromozioni() {
+ /*   public List<Promozione> getPromozioni() {
         return promozioni;
     }
 
@@ -80,23 +57,9 @@ public class Negozio {
         this.promozioni.add(promozione);
 
         else throw new IllegalArgumentException();
-    }
+    }*/
 
-    public List<String> getcategorie() {
-        return categorie;
-    }
 
-    public void addCategoria(String categoria) {
-        this.categorie.add(categoria);
-    }
-
-    public boolean contieneCategoria(String categoria) {
-        return categorie.contains(categoria);
-    }
-
-    public boolean contienePromozione(Promozione promozione) {
-        return promozioni.contains(promozione);
-    }
 
     /**
      * metodo di supporto per ottenere il responsabile dalla lista del personale
@@ -117,7 +80,7 @@ public class Negozio {
         return  (Responsabile) responsabile;
     }
 
-    private boolean promozioneDuplicata(int ID) {
+  /*  private boolean promozioneDuplicata(int ID) {
 
         boolean result = false;
 
@@ -130,9 +93,10 @@ public class Negozio {
         }
 
         return  result;
-    }
+    }*/
     public void creaVetrina(String nome, String tipologia, String indirizzo, String contatto){
         Vetrina vetrina=new Vetrina(nome, indirizzo, tipologia, contatto);
+        this.vetrina=vetrina;
     }
 
     @Override
@@ -140,13 +104,11 @@ public class Negozio {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Negozio negozio = (Negozio) o;
-        return getNome().equals(negozio.getNome()) &&
-                getIndirizzo().equals(negozio.getIndirizzo()) &&
-                getTipologia().equals(negozio.getTipologia());
+        return id == negozio.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getNome(), getIndirizzo(), getTipologia());
+        return Objects.hash(id);
     }
 }

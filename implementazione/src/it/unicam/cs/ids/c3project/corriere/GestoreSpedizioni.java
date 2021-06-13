@@ -62,10 +62,8 @@ public class GestoreSpedizioni {
         List<Pacco> paccoList=pacchiDaConsegnare;
         paccoList=paccoList.stream().filter(paccoPredicate).collect(Collectors.toList());
         if(paccoList.isEmpty())
-            throw new IllegalArgumentException("Non esiste alcun pacco con l'ID inserito");
+            throw new IllegalArgumentException("Non esiste alcun pacco con il criterio inserito");
         return paccoList;
-
     }
-
 
 }

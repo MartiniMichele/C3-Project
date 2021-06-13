@@ -1,6 +1,7 @@
 package it.unicam.cs.ids.c3project.negozio;
 
 import it.unicam.cs.ids.c3project.personale.Personale;
+import it.unicam.cs.ids.c3project.personale.Responsabile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +11,10 @@ import java.util.stream.Collectors;
 /**
  * classe gestore che ha il compito di aggiungere e gestire i negozi
  */
-public class GestoreNegozio implements GestoreNegozioInterface {
+public class GestoreNegozio{
 
-    private static List<Negozio> negozi = new ArrayList<>();       //lista dei negozi aggiunti
-
+    private List<Negozio> negozi = new ArrayList<>();       //lista dei negozi aggiunti
+    private List<Vetrina> vetrine=new ArrayList<>();
 
     /**
      * metodo che ritorna la lista dei negozi
@@ -26,15 +27,14 @@ public class GestoreNegozio implements GestoreNegozioInterface {
     /**
      * metodo che aggiunge una categoria, torna true se viene aggiunta e false altrimenti
      * @param categoria da aggiungere
-     * @param negozio associato
+     * @param nomeNegozio associato
      * @return true se viene aggiunta e false altrimenti
      */
-    @Override
-    public boolean aggiungiCategoria(String categoria, String negozio) {
-        Predicate<Negozio> predicate = p -> p.getNome().equals(negozio);
-        Negozio istanzaNegozio = searchNegozio(predicate).get(0);
-        istanzaNegozio.addCategoria(categoria);
-        return istanzaNegozio.contieneCategoria(categoria);
+    public boolean aggiungiCategoria(String categoria, String nomeNegozio) {
+
+        Predicate<Vetrina> predicate = p -> p.getNome().equals(nomeNegozio);
+        Vetrina istanzaNegozio = searchVetrina(predicate).get(0);
+        return istanzaNegozio.addCategoria(categoria);
     }
 
     /**
@@ -43,44 +43,50 @@ public class GestoreNegozio implements GestoreNegozioInterface {
      * @param negozio associato alla categoria
      * @return true se rimosso false altrimenti
      */
-    @Override
     public boolean rimuoviCategoria(String categoria, String negozio) {
 
-        Predicate<Negozio> predicate = p -> p.getNome().equals(negozio);
-        Negozio istanzaNegozio = searchNegozio(predicate).get(0);
+        Predicate<Vetrina> predicate = p -> p.getNome().equals(negozio);
+        Vetrina istanzaNegozio = searchVetrina(predicate).get(0);
         negozi.remove(istanzaNegozio);
 
         return !negozi.contains(istanzaNegozio);
     }
 
     //TODO RIMUOVERE
-    @Override
-    public List<String> getCategorie(String negozio) {
+    public List<String> getCategorie(String vetrina) {
         //aggiungere controlli
-        Predicate<Negozio> predicate = p -> p.getNome().equals(negozio);
-        Negozio istanzaNegozio = searchNegozio(predicate).get(0);
-
-        return istanzaNegozio.getcategorie();
+        Predicate<Vetrina> predicate = p -> p.getNome().equals(vetrina);
+        Vetrina istanzaNegozio = searchVetrina(predicate).get(0);
+        return istanzaNegozio.getCategoriaProdotti();
     }
 
-    @Override
+    public List<String> getAllCategorie() {
+        List<String> categorie=new ArrayList<>();
+        for (Vetrina vetrina: vetrine) {
+            for (String categoria:vetrina.getCategoriaProdotti()){
+                if(!categorie.contains(categoria))
+                    categorie.add(categoria);
+            }
+        }
+        return categorie;
+    }
+
     public boolean avviaPromozione(String nome, String negozio, int puntiBonus) {
 
         Promozione promozione = new Promozione(nome, negozio, puntiBonus);
-        Predicate<Negozio> predicate = p -> p.getNome().equals(negozio);
-        Negozio istanzaNegozio = searchNegozio(predicate).get(0);
+        Predicate<Vetrina> predicate = p -> p.getNome().equals(vetrine);
+        Vetrina istanzaNegozio = searchVetrina(predicate).get(0);
         istanzaNegozio.addPromozione(promozione);
-
         return istanzaNegozio.contienePromozione(promozione);
     }
 
-    @Override
-    public boolean creaNegozio(String nome, String indirizzo, String tipologia, List<Personale> personale, List<Promozione> promozioni, List<String> categorie, String contatto) {
+
+    public boolean creaNegozio(String nome, String indirizzo, String tipologia, Responsabile responsabile, List<Personale> personale, List<Promozione> promozioni, List<String> categorie, String contatto) {
         //aggiungere controllo se già esistente
 
         boolean flag = negozioEsistente(nome);
         if (!flag) {
-            Negozio negozio = new Negozio(tipologia, personale, categorie);
+            Negozio negozio = new Negozio(responsabile, personale);
             negozio.creaVetrina(nome, tipologia,indirizzo,contatto);
             negozi.add(negozio);
         }
@@ -97,20 +103,22 @@ public class GestoreNegozio implements GestoreNegozioInterface {
      */
     public List<Negozio> searchNegozio(Predicate<Negozio> predicate) {
 
-        List<Negozio> lista = new ArrayList<>();
+        List<Negozio> listaNegozi = new ArrayList<>();
+        listaNegozi = negozi;
+        listaNegozi = listaNegozi.stream().filter(predicate).collect(Collectors.toList());
+        return listaNegozi;
+    }
 
-        lista = negozi;
-        lista = lista.stream().filter(predicate).collect(Collectors.toList());
-
-        return lista;
+    public List<Vetrina> searchVetrina(Predicate<Vetrina> predicate){
+        List<Vetrina> listaVetrine=new ArrayList<>();
+        listaVetrine = vetrine;
+        listaVetrine=listaVetrine.stream().filter(predicate).collect(Collectors.toList());
+        return listaVetrine;
     }
 
     private boolean negozioEsistente(String negozio) {
-
         boolean result = false;
-
-        for (Negozio elemento : negozi) {
-
+        for (Vetrina elemento : vetrine) {
             if (elemento.getNome().equals(negozio)) {
                 result = true;
                 break;
@@ -118,5 +126,6 @@ public class GestoreNegozio implements GestoreNegozioInterface {
         }
         return  result;
     }
+
 
 }

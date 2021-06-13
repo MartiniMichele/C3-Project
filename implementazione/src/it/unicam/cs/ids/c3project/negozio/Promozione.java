@@ -11,10 +11,10 @@ public class Promozione {
     private String negozio;
     private int puntiBonus;
 
-   public Promozione(String nome, String negozio, int puntiBonus) {
+   public Promozione(String nome, String nomeNegozio, int puntiBonus) {
         ID++;
         this.nome = nome;
-        this.negozio = negozio;
+        this.negozio = nomeNegozio;
         this.puntiBonus = puntiBonus;
     }
 
