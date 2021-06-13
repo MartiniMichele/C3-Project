@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.c3project.cliente;
+package it.unicam.cs.ids.c3project.personale;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import java.util.List;
 public interface Personale {
 
     int getId();
-    void richiedereSpedizione();
+    void richiedereSpedizione(int idVenditore, int idOrdine);
     void attribuzionePunti(int punti);
     boolean isResponsabile();
 

@@ -5,6 +5,8 @@ import it.unicam.cs.ids.c3project.contenuto.Pacco;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class GestoreSpedizioni {
     private List<Pacco> pacchiDaConsegnare;
@@ -15,22 +17,23 @@ public class GestoreSpedizioni {
      * Crea un nuovo Pacco
      * @return
      */
-    public boolean creaPacco(int ID, int corriereID, LocalTime tempoDiArrivoStimato, TipologiaContenuto contenuto, List<Articolo> articoli, StatoPacco statoPacco) {
-        Pacco pacco=new Pacco(generaID(),corriereID,tempoDiArrivoStimato,contenuto,articoli,statoPacco);
+    public boolean creaPacco(int ID, int corriereID,String indirizzo, LocalTime tempoDiArrivoStimato, TipologiaContenuto contenuto, List<Articolo> articoli, StatoPacco statoPacco,String cliente) {
+        Pacco pacco=new Pacco(generaID(),corriereID, indirizzo,tempoDiArrivoStimato,contenuto,articoli,statoPacco, cliente);
         pacchiDaConsegnare.add(pacco);
         return pacchiDaConsegnare.contains(pacco);
         //TODO ECCEZIONI
     }
 
     /**
-     * Aggiorna lo stato di consegna del pacco individuandolo tramite ID
+     * Aggiorna lo stato di consegna del pacco individuandolo tramite ID(il corriere lo inserisce manualmente, nell'ipotesi di utilizzare uno scanner)
      * @param statoPacco
      * @return
      */
     public StatoPacco aggiornaStato(int ID,StatoPacco statoPacco){
-        Pacco pacco=filtraPacchi(ID);
-        pacco.setStatoPacco(statoPacco);
-        return pacco.getStatoPacco();
+        Predicate<Pacco> predicate=p->p.getID()==ID;
+        List<Pacco> pacchi=filtraPacchi(predicate);
+        pacchi.get(0).setStatoPacco(statoPacco);
+        return  pacchi.get(0).getStatoPacco();
     }
 
 
@@ -41,9 +44,10 @@ public class GestoreSpedizioni {
     public List<Corriere> getCorrieriDisponibili() {
         return corrieriDisponibili;
     }
-
-    public void  contattaCorriere() {
-
+    public Corriere sceltaCorriere(Corriere corriereScelto){
+        return null;
+    }
+    public void  richiediSpedizione() {
     }
 
     /**
@@ -54,13 +58,14 @@ public class GestoreSpedizioni {
         return ID++;
     }
 
-    public Pacco filtraPacchi(int ID){
-        for (Pacco pacco :pacchiDaConsegnare) {
-            if(pacco.getID()==ID){
-                return pacco;
-            }
-        }
-        throw new IllegalArgumentException("Non esiste alcun pacco con l'ID inserito");
+    public List<Pacco> filtraPacchi(Predicate<Pacco> paccoPredicate){
+        List<Pacco> paccoList=pacchiDaConsegnare;
+        paccoList=paccoList.stream().filter(paccoPredicate).collect(Collectors.toList());
+        if(paccoList.isEmpty())
+            throw new IllegalArgumentException("Non esiste alcun pacco con l'ID inserito");
+        return paccoList;
+
     }
+
 
 }

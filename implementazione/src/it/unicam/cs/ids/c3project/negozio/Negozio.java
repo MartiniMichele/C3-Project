@@ -1,7 +1,7 @@
 package it.unicam.cs.ids.c3project.negozio;
 
-import it.unicam.cs.ids.c3project.cliente.Personale;
-import it.unicam.cs.ids.c3project.cliente.Responsabile;
+import it.unicam.cs.ids.c3project.personale.Personale;
+import it.unicam.cs.ids.c3project.personale.Responsabile;
 
 import java.util.List;
 import java.util.Objects;
@@ -13,23 +13,22 @@ public class Negozio {
 
     private String nome;
     private Responsabile responsabile;
-    private Vetrina vetrina;
     private String indirizzo;
     private String tipologia;
+    private Vetrina vetrina;
     private List<Personale> personale;
     private List<Promozione> promozioni;
     private List<String> categorie;
 
-   public Negozio(String nome, String indirizzo, String tipologia, List<Personale> personale, List<Promozione> promozioni, List<String> categorie) {
-        this.nome = nome;
+   public Negozio(String tipologia, List<Personale> personale, List<String> categorie) {
         this.responsabile = obtainResponsabile(personale);
-        this.indirizzo = indirizzo;
         this.tipologia = tipologia;
         this.personale = personale;
-        this.promozioni = promozioni;
         this.categorie = categorie;
 
     }
+
+
 
     public String getNome() {
         return nome;

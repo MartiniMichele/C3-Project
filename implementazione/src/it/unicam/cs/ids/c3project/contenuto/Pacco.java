@@ -9,16 +9,17 @@ import java.util.List;
 public class Pacco {
     private int ID;
     private int corriereID;
-    private LocalTime orarioPartenza;
+    private String indirizzoDiConsegna;
     private LocalTime tempoDiArrivoStimato;
     private TipologiaContenuto contenuto;
     private List<Articolo> articoli;
     private StatoPacco statoPacco;
     private String cliente;
 
-    public Pacco(int ID, int corriereID, LocalTime tempoDiArrivoStimato, TipologiaContenuto contenuto, List<Articolo> articoli, StatoPacco statoPacco, String cliente) {
+    public Pacco(int ID, int corriereID,String indirizzoDiConsegna, LocalTime tempoDiArrivoStimato, TipologiaContenuto contenuto, List<Articolo> articoli, StatoPacco statoPacco, String cliente) {
         this.ID=ID;
         this.corriereID = corriereID;
+        this.indirizzoDiConsegna=indirizzoDiConsegna;
         this.tempoDiArrivoStimato = tempoDiArrivoStimato;
         this.contenuto = contenuto;
         this.articoli = articoli;
@@ -42,13 +43,7 @@ public class Pacco {
         this.corriereID = corriereID;
     }
 
-    public LocalTime getOrarioPartenza() {
-        return orarioPartenza;
-    }
 
-    public void setOrarioPartenza(LocalTime orarioPartenza) {
-        this.orarioPartenza = orarioPartenza;
-    }
 
     public LocalTime getTempoDiArrivoStimato() {
         return tempoDiArrivoStimato;

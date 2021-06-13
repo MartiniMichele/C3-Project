@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.c3project.cliente;
+package it.unicam.cs.ids.c3project.personale;
 
 /**
  * classe che ha il compito di rappresentare un responsabile
@@ -9,12 +9,11 @@ public class Responsabile extends Commesso {
         super(nome);
     }
 
-    void gestioneVetrina() {
-
-    }
 
     @Override
     public boolean isResponsabile() {
         return true;
     }
+
+
 }

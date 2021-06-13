@@ -1,6 +1,6 @@
 package it.unicam.cs.ids.c3project.negozio;
 
-import it.unicam.cs.ids.c3project.cliente.Personale;
+import it.unicam.cs.ids.c3project.personale.Personale;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +31,9 @@ public class GestoreNegozio implements GestoreNegozioInterface {
      */
     @Override
     public boolean aggiungiCategoria(String categoria, String negozio) {
-
         Predicate<Negozio> predicate = p -> p.getNome().equals(negozio);
         Negozio istanzaNegozio = searchNegozio(predicate).get(0);
         istanzaNegozio.addCategoria(categoria);
-
         return istanzaNegozio.contieneCategoria(categoria);
     }
 
@@ -77,13 +75,13 @@ public class GestoreNegozio implements GestoreNegozioInterface {
     }
 
     @Override
-    public boolean creaNegozio(String nome, String indirizzo, String tipologia, List<Personale> personale, List<Promozione> promozioni, List<String> categorie) {
+    public boolean creaNegozio(String nome, String indirizzo, String tipologia, List<Personale> personale, List<Promozione> promozioni, List<String> categorie, String contatto) {
         //aggiungere controllo se già esistente
 
         boolean flag = negozioEsistente(nome);
-
         if (!flag) {
-            Negozio negozio = new Negozio(nome, indirizzo, tipologia, personale, promozioni, categorie);
+            Negozio negozio = new Negozio(tipologia, personale, categorie);
+            negozio.creaVetrina(nome, tipologia,indirizzo,contatto);
             negozi.add(negozio);
         }
         else throw new IllegalArgumentException("negozio già presente");

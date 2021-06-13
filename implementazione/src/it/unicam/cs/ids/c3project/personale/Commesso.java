@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.c3project.cliente;
+package it.unicam.cs.ids.c3project.personale;
 
 import java.util.Objects;
 
@@ -11,7 +11,7 @@ public class Commesso implements Personale {
     protected static int ID = 0;
     protected String nome;
 
-    Commesso(String nome) {
+    public Commesso(String nome) {
         ID++;
         this.nome = nome;
     }
@@ -22,7 +22,7 @@ public class Commesso implements Personale {
     }
 
     @Override
-    public void richiedereSpedizione() {
+    public void richiedereSpedizione(int idVenditore, int idOrdine) {
 
     }
 
