@@ -43,7 +43,21 @@ public class Pacco {
         this.corriereID = corriereID;
     }
 
+    public String getIndirizzoDiConsegna() {
+        return indirizzoDiConsegna;
+    }
 
+    public void setIndirizzoDiConsegna(String indirizzoDiConsegna) {
+        this.indirizzoDiConsegna = indirizzoDiConsegna;
+    }
+
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
 
     public LocalTime getTempoDiArrivoStimato() {
         return tempoDiArrivoStimato;
@@ -63,10 +77,6 @@ public class Pacco {
 
     public List<Articolo> getArticoli() {
         return articoli;
-    }
-
-    public void setArticoli(List<Articolo> articoli) {
-        this.articoli = articoli;
     }
 
     public StatoPacco getStatoPacco() {

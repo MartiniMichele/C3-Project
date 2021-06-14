@@ -4,13 +4,14 @@ import it.unicam.cs.ids.c3project.contenuto.Articolo;
 import it.unicam.cs.ids.c3project.contenuto.Pacco;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class GestoreSpedizioni {
-    private List<Pacco> pacchiDaConsegnare;
-    private List<Corriere> corrieriDisponibili;
+    private List<Pacco> pacchiDaConsegnare=new ArrayList<>();
+    private List<Corriere> listaCorrieri=new ArrayList<>();
     private static int ID=0;
 
     /**
@@ -21,7 +22,6 @@ public class GestoreSpedizioni {
         Pacco pacco=new Pacco(generaID(),corriereID, indirizzo,tempoDiArrivoStimato,contenuto,articoli,statoPacco, cliente);
         pacchiDaConsegnare.add(pacco);
         return pacchiDaConsegnare.contains(pacco);
-        //TODO ECCEZIONI
     }
 
     /**
@@ -41,13 +41,37 @@ public class GestoreSpedizioni {
         return pacchiDaConsegnare;
     }
 
+    /**
+     * Metodo che ritorna una lista di Corrieri disponibili
+     * @return lista di corrieri disponibili
+     */
     public List<Corriere> getCorrieriDisponibili() {
+        List<Corriere> corrieriDisponibili=new ArrayList<>();
+        for (Corriere corriere:listaCorrieri) {
+            if (corriere.getStato())
+                corrieriDisponibili.add(corriere);
+        }
         return corrieriDisponibili;
     }
-    public Corriere sceltaCorriere(Corriere corriereScelto){
-        return null;
+
+
+
+    public int  contattaCorriere(String indirizzo, TipologiaContenuto contenuto, Corriere corriere, boolean flag) {
+        if(flag) {
+            corriere.aggiornaStato();
+            return corriere.getID();
+        }
+        return 0;
     }
-    public void  richiediSpedizione() {
+    public void comunicaDati(int idCorrereScelto, String indirizzo, int idPacco, TipologiaContenuto tipologiaContenuto ){
+        for (Corriere corriere:listaCorrieri) {
+            if(corriere.getID()==idCorrereScelto){
+                for (Pacco pacco:pacchiDaConsegnare) {
+                    if(pacco.getID()==idPacco)
+                        corriere.aggiungiPacco(pacco);
+                }
+            }
+        }
     }
 
     /**
@@ -65,5 +89,6 @@ public class GestoreSpedizioni {
             throw new IllegalArgumentException("Non esiste alcun pacco con il criterio inserito");
         return paccoList;
     }
+
 
 }

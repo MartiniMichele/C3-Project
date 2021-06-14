@@ -27,7 +27,7 @@ public class Corriere {
         this.tipologiaCorriere = tipologiaCorriere;
     }
 
-    public boolean isStato() {
+    public boolean getStato() {
         return stato;
     }
 
@@ -39,9 +39,6 @@ public class Corriere {
         return carico;
     }
 
-    public void setCarico(List<Pacco> carico) {
-        this.carico = carico;
-    }
 
     public double getTariffa() {
         return tariffa;

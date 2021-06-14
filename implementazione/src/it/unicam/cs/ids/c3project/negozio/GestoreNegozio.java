@@ -31,7 +31,6 @@ public class GestoreNegozio{
      * @return true se viene aggiunta e false altrimenti
      */
     public boolean aggiungiCategoria(String categoria, String nomeNegozio) {
-
         Predicate<Vetrina> predicate = p -> p.getNome().equals(nomeNegozio);
         Vetrina istanzaNegozio = searchVetrina(predicate).get(0);
         return istanzaNegozio.addCategoria(categoria);
@@ -39,27 +38,30 @@ public class GestoreNegozio{
 
     /**
      * metodo che rimuove una categoria e torna true se viene rimosso e false altrimenti
-     * @param categoria da aggiungere
-     * @param negozio associato alla categoria
+     * @param nomeNegozio associato alla categoria
      * @return true se rimosso false altrimenti
      */
-    public boolean rimuoviCategoria(String categoria, String negozio) {
-
-        Predicate<Vetrina> predicate = p -> p.getNome().equals(negozio);
+    public boolean rimuoviCategoria(String categoria,String nomeNegozio) {
+        Predicate<Vetrina> predicate = p -> p.getNome().equals(nomeNegozio);
         Vetrina istanzaNegozio = searchVetrina(predicate).get(0);
-        negozi.remove(istanzaNegozio);
-
-        return !negozi.contains(istanzaNegozio);
+        return istanzaNegozio.getCategoriaProdotti().remove(categoria);
     }
 
-    //TODO RIMUOVERE
+    /**
+     * Metodo utilizzato per ritornare tutte le categorie associate a un nome di un negozio
+     * @param vetrina il nome del negozio
+     * @return la lista delle categorie esistenti in un certo negozio
+     */
     public List<String> getCategorie(String vetrina) {
-        //aggiungere controlli
         Predicate<Vetrina> predicate = p -> p.getNome().equals(vetrina);
         Vetrina istanzaNegozio = searchVetrina(predicate).get(0);
         return istanzaNegozio.getCategoriaProdotti();
     }
 
+    /**
+     * Metodo utilizzato per ritornare tutte le categorie esistenti
+     * @return la lista delle categorie esistenti
+     */
     public List<String> getAllCategorie() {
         List<String> categorie=new ArrayList<>();
         for (Vetrina vetrina: vetrine) {
@@ -71,14 +73,27 @@ public class GestoreNegozio{
         return categorie;
     }
 
-    public boolean avviaPromozione(String nome, String negozio, int puntiBonus) {
+    public boolean avviaPromozione(String nomePromozione, String negozio, int puntiBonus) {
 
-        Promozione promozione = new Promozione(nome, negozio, puntiBonus);
-        Predicate<Vetrina> predicate = p -> p.getNome().equals(vetrine);
-        Vetrina istanzaNegozio = searchVetrina(predicate).get(0);
-        istanzaNegozio.addPromozione(promozione);
-        return istanzaNegozio.contienePromozione(promozione);
-    }
+       Promozione promozione = new Promozione(nomePromozione, negozio, puntiBonus);
+       Predicate<Vetrina> predicate = p -> p.getNome().equals(negozio);
+       Vetrina istanzaVetrina = searchVetrina(predicate).get(0);
+       istanzaVetrina.addPromozione(promozione);
+       return istanzaVetrina.contienePromozione(promozione);
+
+
+       /*     for (Vetrina vetrina:vetrine) {
+                if (vetrina.getNome().equals(negozio))
+                    for (Promozione promozione:vetrina.getPromozioni()) {
+                        if (promozione.getNome().equals(nomePromozione))
+                            return false;
+                    }
+                Promozione promozione = new Promozione(nomePromozione, negozio, puntiBonus);
+                vetrina.addPromozione(promozione);
+            }
+            return true;*/
+        }
+
 
 
     public boolean creaNegozio(String nome, String indirizzo, String tipologia, Responsabile responsabile, List<Personale> personale, List<Promozione> promozioni, List<String> categorie, String contatto) {
