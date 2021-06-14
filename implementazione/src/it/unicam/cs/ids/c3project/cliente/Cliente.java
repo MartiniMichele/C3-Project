@@ -13,6 +13,8 @@ public class Cliente {
     private String indirizzo;
     private List<Negozio> preferiti;
     private List<Pacco> ordiniEffettuati;
+
+
     public Cliente(String username, int saldoPunti, String indirizzo){
         this.username = username;
         this.saldoPunti = saldoPunti;
