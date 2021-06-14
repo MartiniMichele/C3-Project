@@ -9,12 +9,13 @@ import java.util.Objects;
 public class Magazzino implements MagazzinoInterface {
 
     private int ID;
-    private List<Pacco> pacchiPresenti = new ArrayList<>();
     private String indirizzo;
+    private List<Pacco> pacchiPresenti = new ArrayList<>();
     private List<Locker> lockers = new ArrayList<>();
     private String delegato;
     private int capienza;
     private String addetto;
+
 
     public int getID() {
         return ID;
@@ -102,6 +103,5 @@ public class Magazzino implements MagazzinoInterface {
     public int hashCode() {
         return Objects.hash(getID());
     }
-
 
 }

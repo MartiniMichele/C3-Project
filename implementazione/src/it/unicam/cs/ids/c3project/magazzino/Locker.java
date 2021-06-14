@@ -33,7 +33,6 @@ public class Locker {
         return new Locker(ID, codiceSblocco, stato, magazzino, timer);
     }
 
-
     public int getID() {
         return ID;
     }

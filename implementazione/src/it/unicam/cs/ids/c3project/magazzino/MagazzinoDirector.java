@@ -12,7 +12,6 @@ public class MagazzinoDirector {
     public MagazzinoInterface makeMagazzinoLocker(int ID, String indirizzo, List<Locker> lockers, int capienza, String addetto) {
 
         builder.setID(ID);
-        builder.setIndirizzo(indirizzo);
         builder.setLockers(lockers);
         builder.setDelegato(null);
         builder.setCapienza(capienza);
@@ -24,7 +23,6 @@ public class MagazzinoDirector {
     public MagazzinoInterface makeMagazzinoDelegato(int ID, String indirizzo, String delegato, int capienza, String addetto) {
 
         builder.setID(ID);
-        builder.setIndirizzo(indirizzo);
         builder.setLockers(null);
         builder.setDelegato(delegato);
         builder.setCapienza(capienza);
