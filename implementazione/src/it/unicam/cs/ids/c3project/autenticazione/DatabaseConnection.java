@@ -7,24 +7,21 @@ import java.sql.DriverManager;
 public class DatabaseConnection {
 
     //TODO RIEMPIRE CON I DATI(ACCESSO, URL......). DA SOSTITUTIRE TUTTE LE STRINGHE VUOTE
-    public Connection databaseLink;
 
-    public Connection getConnection() {
+    Connection connection=null;
 
-        String dbName = "";
-        String dbUsername = "";
-        String dbPassword = "";
-        String url = "";
+    public static Connection ConnectionToDB() {
 
         try {
-            Class.forName("");
-            databaseLink = DriverManager.getConnection(url, dbUsername, dbPassword);
+            Class.forName("org.sqlite.JDBC");
+            Connection con = DriverManager.getConnection("jdbc:sqlite:AWADB");
+            System.out.println("Connessione al DB riuscita");
+            return con;
 
         }   catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-
-        return databaseLink;
 
     }
 }
