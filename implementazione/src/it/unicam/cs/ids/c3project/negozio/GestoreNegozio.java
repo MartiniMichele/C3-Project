@@ -15,6 +15,15 @@ public class GestoreNegozio{
 
     private List<Negozio> negozi = new ArrayList<>();       //lista dei negozi aggiunti
     private List<Vetrina> vetrine = new ArrayList<>();
+    private static GestoreNegozio istanzaGestore;
+
+
+    public static GestoreNegozio getInstance() {
+
+        if (istanzaGestore == null) istanzaGestore = new GestoreNegozio();
+
+        return istanzaGestore;
+    }
 
     /**
      * metodo che ritorna la lista dei negozi

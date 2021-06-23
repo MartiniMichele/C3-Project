@@ -20,13 +20,13 @@ public class MagazzinoDirector {
         return builder.getResult();
     }
 
-    public MagazzinoInterface makeMagazzinoDelegato(int ID, String indirizzo, String delegato, int capienza, String addetto) {
+    public MagazzinoInterface makeMagazzinoDelegato(int ID, String indirizzo, String delegato, int capienza) {
 
         builder.setID(ID);
         builder.setLockers(null);
         builder.setDelegato(delegato);
         builder.setCapienza(capienza);
-        builder.setAddetto(addetto);
+        builder.setAddetto(null);
 
         return builder.getResult();
     }

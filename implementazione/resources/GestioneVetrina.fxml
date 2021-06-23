@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.ids.c3project.view.GestioneVetrinaController">
+   <children>
+      <HBox prefHeight="600.0" prefWidth="800.0">
+         <children>
+            <VBox prefHeight="590.0" prefWidth="320.0">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" top="5.0" />
+               </HBox.margin>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Categorie" textAlignment="CENTER" wrappingWidth="328.13671875">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <ListView fx:id="categorieListView" prefHeight="200.0" prefWidth="200.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Inserisci i dati necessari per l'inserimento della categoria:" wrappingWidth="329.625">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" top="40.0" />
+                     </VBox.margin>
+                  </Text>
+                  <HBox prefHeight="34.0" prefWidth="329.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Categoria:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="nuovaCategoriaTextField">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="43.0" prefWidth="329.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Negozio:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="negozioTextField">
+                           <HBox.margin>
+                              <Insets left="17.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="38.0" prefWidth="329.0" spacing="100.0">
+                     <children>
+                        <Button fx:id="nuovaCategoriaButton" mnemonicParsing="false" onAction="#nuovaCategoriaButtonPushed" text="Aggiungi categoria" />
+                        <Button fx:id="rimuoviCategoriaButton" mnemonicParsing="false" onAction="#rimuoviCategoriaButtonPushed" text="Rimuovi categoria" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <HBox.margin>
+                  <Insets bottom="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

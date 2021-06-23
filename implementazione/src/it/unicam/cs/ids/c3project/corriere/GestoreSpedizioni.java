@@ -13,6 +13,16 @@ public class GestoreSpedizioni {
     private List<Pacco> pacchiDaConsegnare=new ArrayList<>();
     private List<Corriere> listaCorrieri=new ArrayList<>();
     private static int ID=0;
+    private static GestoreSpedizioni istanzaGestoreSpedizione;
+
+
+
+    public static GestoreSpedizioni getInstance() {
+        if (istanzaGestoreSpedizione == null) istanzaGestoreSpedizione = new GestoreSpedizioni();
+
+        return istanzaGestoreSpedizione;
+    }
+
 
     /**
      * Crea un nuovo Pacco

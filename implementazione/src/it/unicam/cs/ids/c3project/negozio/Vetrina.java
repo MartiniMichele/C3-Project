@@ -68,6 +68,7 @@ public class Vetrina {
     public void setContatto(String contatto) {
         this.contatto = contatto;
     }
+
     public boolean addCategoria(String categoria){
         if(categoriaProdotti.contains(categoria))
             return false;

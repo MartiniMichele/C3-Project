@@ -41,7 +41,7 @@ public class RicercaNegozioController {
 
 
     //TODO RIMUOVERE
-    GestoreNegozio gestore = new GestoreNegozio();
+    GestoreNegozio gestore = GestoreNegozio.getInstance();
     Responsabile resp = new Responsabile("Enrico");
     List<Personale> pers = new ArrayList<>();
     List<Promozione> promo = new ArrayList<>();

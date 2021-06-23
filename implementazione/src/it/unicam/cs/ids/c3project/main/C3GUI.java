@@ -12,7 +12,7 @@ public class C3GUI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/RicercaNegozio.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
         primaryStage.setTitle("C3 Project");
         Scene scene = new Scene(root);
 
