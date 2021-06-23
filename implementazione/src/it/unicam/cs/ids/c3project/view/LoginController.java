@@ -38,10 +38,10 @@ public class LoginController {
 
            String sql="SELECT * FROM Account WHERE username LIKE ? AND password LIKE ?;";
             try {
-               // pst=con.prepareStatement(sql);
+                pst=con.prepareStatement(sql);
                 pst.setString(1,usernameField.getText());
                 pst.setString(2,passwordField.getText());
-                rs=pst.executeQuery(sql);
+                rs=pst.executeQuery();
                 if (rs.next())
                         launchError("login effettuato");
                 else launchError("Username o Password non validi");
@@ -49,6 +49,7 @@ public class LoginController {
             }
             catch (Exception e){
                 launchError("Catch");
+                e.printStackTrace();
             }
 
 

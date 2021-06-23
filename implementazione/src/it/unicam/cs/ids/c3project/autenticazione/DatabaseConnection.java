@@ -14,7 +14,7 @@ public class DatabaseConnection {
 
         try {
             Class.forName("org.sqlite.JDBC");
-            Connection con = DriverManager.getConnection("jdbc:sqlite:AWADB");
+            Connection con = DriverManager.getConnection("jdbc:sqlite:AwaDB.db");
             System.out.println("Connessione al DB riuscita");
             return con;
 
