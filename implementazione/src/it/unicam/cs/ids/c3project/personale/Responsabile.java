@@ -5,14 +5,17 @@ package it.unicam.cs.ids.c3project.personale;
  */
 public class Responsabile extends Commesso {
 
-    Responsabile(String nome) {
+    boolean isResponsabile;
+
+    public Responsabile(String nome) {
         super(nome);
+        isResponsabile = true;
     }
 
 
     @Override
     public boolean isResponsabile() {
-        return true;
+        return isResponsabile;
     }
 
 

@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.ids.c3project.view.RicercaNegozioController">
    <children>
       <HBox layoutY="43.0" prefHeight="557.0" prefWidth="800.0">
          <children>
-            <ListView prefHeight="442.0" prefWidth="200.0">
+            <ListView fx:id="categorieListView" prefHeight="442.0" prefWidth="200.0">
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" top="5.0" />
                </HBox.margin>
@@ -16,22 +24,22 @@
             <AnchorPane prefHeight="557.0" prefWidth="36.0" />
             <VBox alignment="CENTER" prefHeight="557.0" prefWidth="341.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" text="Visualizza per pomozione attiva">
+                  <Button fx:id="visualizzaPromo" mnemonicParsing="false" onAction="#visualizzaPromoButtonPushed" text="Visualizza per pomozione attiva">
                      <VBox.margin>
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" text="Visualizza categorie">
+                  <Button fx:id="visualizzaCategorie" mnemonicParsing="false" onAction="#visualizzaCategorieButtonPushed" text="Visualizza categorie">
                      <VBox.margin>
                         <Insets bottom="80.0" />
                      </VBox.margin>
                   </Button>
-                  <TextField>
+                  <TextField fx:id="nomeNegozioTextField">
                      <VBox.margin>
                         <Insets left="80.0" right="80.0" />
                      </VBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" text="Cerca per nome">
+                  <Button fx:id="cercaNomeButton" mnemonicParsing="false" onAction="#cercaNomeButtonPushed" text="Cerca per nome">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
@@ -44,20 +52,22 @@
                </children>
             </VBox>
             <AnchorPane prefHeight="557.0" prefWidth="39.0" />
-            <ListView prefHeight="547.0" prefWidth="204.0">
+            <ListView fx:id="negoziListView" prefHeight="547.0" prefWidth="204.0">
                <HBox.margin>
                   <Insets bottom="5.0" right="5.0" top="5.0" />
                </HBox.margin>
             </ListView>
          </children>
       </HBox>
-      <Label layoutX="76.0" layoutY="26.0" text="Categorie" />
-      <Label layoutX="679.0" layoutY="26.0" text="Negozi" />
-      <Accordion>
-        <panes>
-          <TitledPane animated="false" text="untitled 1" />
-          <TitledPane animated="false" text="untitled 2" />
-        </panes>
-      </Accordion>
+      <Label layoutX="57.0" layoutY="13.0" text="Categorie">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+      <Accordion />
+      <Text layoutX="672.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Negozi">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

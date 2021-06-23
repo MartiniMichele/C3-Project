@@ -10,10 +10,12 @@ public class Commesso implements Personale {
 
     protected static int ID = 0;
     protected String nome;
+    boolean isResponsabile;
 
     public Commesso(String nome) {
         ID++;
         this.nome = nome;
+        isResponsabile = false;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class Commesso implements Personale {
 
     @Override
     public boolean isResponsabile() {
-        return false;
+        return isResponsabile;
     }
 
     @Override

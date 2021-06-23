@@ -94,8 +94,8 @@ public class Negozio {
 
         return  result;
     }*/
-    public void creaVetrina(String nome, String tipologia, String indirizzo, String contatto){
-        Vetrina vetrina=new Vetrina(nome, indirizzo, tipologia, contatto);
+    public void creaVetrina(String nome, String tipologia, String indirizzo, String contatto,List<String> categorie){
+        Vetrina vetrina=new Vetrina(nome, indirizzo, tipologia, contatto, categorie);
         this.vetrina=vetrina;
     }
 

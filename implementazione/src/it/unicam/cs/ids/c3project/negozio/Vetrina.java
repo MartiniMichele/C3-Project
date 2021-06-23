@@ -12,13 +12,13 @@ public class Vetrina {
     private List<Promozione> promozioni;
     private String contatto;
 
-    public Vetrina(String nome,String indirizzo, String tipologia, String contatto){
-        this.nome=nome;
-        this.indirizzo=indirizzo;
-        this.tipologia=tipologia;
-        this.contatto=contatto;
-        this.categoriaProdotti=new ArrayList<>();
-        this.promozioni=new ArrayList<>();
+    public Vetrina(String nome,String indirizzo, String tipologia, String contatto, List<String> categoriaProdotti){
+        this.nome = nome;
+        this.indirizzo = indirizzo;
+        this.tipologia = tipologia;
+        this.contatto = contatto;
+        this.categoriaProdotti = categoriaProdotti;
+        this.promozioni = new ArrayList<>();
 
     }
     public String getNome() {
@@ -110,4 +110,10 @@ public class Vetrina {
     }
 
 
+    @Override
+    public String toString() {
+        return  "nome='" + nome + '\'' +
+                ", indirizzo='" + indirizzo + '\'' +
+                ", contatto='" + contatto + '\'';
+    }
 }

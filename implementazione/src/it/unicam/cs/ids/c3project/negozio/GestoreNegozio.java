@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class GestoreNegozio{
 
     private List<Negozio> negozi = new ArrayList<>();       //lista dei negozi aggiunti
-    private List<Vetrina> vetrine=new ArrayList<>();
+    private List<Vetrina> vetrine = new ArrayList<>();
 
     /**
      * metodo che ritorna la lista dei negozi
@@ -22,6 +22,10 @@ public class GestoreNegozio{
      */
     public List<Negozio> getNegozi() {
         return negozi;
+    }
+
+    public List<Vetrina> getvetrine() {
+        return vetrine;
     }
 
     /**
@@ -81,29 +85,18 @@ public class GestoreNegozio{
        istanzaVetrina.addPromozione(promozione);
        return istanzaVetrina.contienePromozione(promozione);
 
-
-       /*     for (Vetrina vetrina:vetrine) {
-                if (vetrina.getNome().equals(negozio))
-                    for (Promozione promozione:vetrina.getPromozioni()) {
-                        if (promozione.getNome().equals(nomePromozione))
-                            return false;
-                    }
-                Promozione promozione = new Promozione(nomePromozione, negozio, puntiBonus);
-                vetrina.addPromozione(promozione);
-            }
-            return true;*/
-        }
+    }
 
 
 
-    public boolean creaNegozio(String nome, String indirizzo, String tipologia, Responsabile responsabile, List<Personale> personale, List<Promozione> promozioni, List<String> categorie, String contatto) {
-        //aggiungere controllo se già esistente
+    public boolean creaNegozio(String nome, String indirizzo, String tipologia, Responsabile responsabile, List<Personale> personale, List<String> categorie, String contatto) {
 
         boolean flag = negozioEsistente(nome);
         if (!flag) {
             Negozio negozio = new Negozio(responsabile, personale);
-            negozio.creaVetrina(nome, tipologia,indirizzo,contatto);
+            negozio.creaVetrina(nome, tipologia,indirizzo,contatto, categorie);
             negozi.add(negozio);
+            vetrine.add(negozio.getVetrina());
         }
         else throw new IllegalArgumentException("negozio già presente");
 
@@ -125,7 +118,7 @@ public class GestoreNegozio{
     }
 
     public List<Vetrina> searchVetrina(Predicate<Vetrina> predicate){
-        List<Vetrina> listaVetrine=new ArrayList<>();
+        List<Vetrina> listaVetrine = new ArrayList<>();
         listaVetrine = vetrine;
         listaVetrine=listaVetrine.stream().filter(predicate).collect(Collectors.toList());
         return listaVetrine;
