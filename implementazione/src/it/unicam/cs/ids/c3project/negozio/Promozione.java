@@ -58,4 +58,13 @@ public class Promozione {
     public int hashCode() {
         return Objects.hash(getID());
     }
+
+    @Override
+    public String toString() {
+        return "Promozione" +
+                ":'" + nome + '\'' +
+                ", negozio='" + negozio + '\'' +
+                ", puntiBonus=" + puntiBonus +
+                '}';
+    }
 }

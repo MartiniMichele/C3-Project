@@ -19,9 +19,7 @@ public class GestoreNegozio{
 
 
     public static GestoreNegozio getInstance() {
-
         if (istanzaGestore == null) istanzaGestore = new GestoreNegozio();
-
         return istanzaGestore;
     }
 
@@ -76,14 +74,23 @@ public class GestoreNegozio{
      * @return la lista delle categorie esistenti
      */
     public List<String> getAllCategorie() {
-        List<String> categorie=new ArrayList<>();
-        for (Vetrina vetrina: vetrine) {
-            for (String categoria:vetrina.getCategoriaProdotti()){
+        List<String> categorie = new ArrayList<>();
+        for (Vetrina vetrina : vetrine) {
+            for (String categoria : vetrina.getCategoriaProdotti()){
                 if(!categorie.contains(categoria))
                     categorie.add(categoria);
             }
         }
         return categorie;
+    }
+
+    public List<Promozione> getAllPromozioni() {
+        List<Promozione> promozioni = new ArrayList<>();
+        for (Vetrina vetrina : vetrine) {
+            //if(!promozioni.contains(promozione))
+            promozioni.addAll(vetrina.getPromozioni());
+        }
+        return promozioni;
     }
 
     public boolean avviaPromozione(String nomePromozione, String negozio, int puntiBonus) {
@@ -94,6 +101,16 @@ public class GestoreNegozio{
        istanzaVetrina.addPromozione(promozione);
        return istanzaVetrina.contienePromozione(promozione);
 
+    }
+
+    public  boolean rimuoviPromozione(Promozione promozione) {
+
+        Predicate<Vetrina> predicate = p -> p.getNome().equals(promozione.getNegozio());
+
+        Vetrina vetrina = searchVetrina(predicate).get(0);
+        vetrina.rimuoviPromozione(promozione);
+
+        return vetrina.contienePromozione(promozione);
     }
 
 

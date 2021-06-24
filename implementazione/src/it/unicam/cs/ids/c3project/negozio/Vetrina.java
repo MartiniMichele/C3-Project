@@ -77,16 +77,20 @@ public class Vetrina {
     }
 
     public void addPromozione(Promozione promozione) {
-        if (!promozioneDuplicata(promozione.getID()))
+        if (!promozioneDuplicata(promozione.getNome()))
             this.promozioni.add(promozione);
         else throw new IllegalArgumentException();
     }
 
+    public void rimuoviPromozione(Promozione promozione) {
+        promozioni.remove(promozione);
+    }
 
-    private boolean promozioneDuplicata(int ID) {
+
+    private boolean promozioneDuplicata(String nome) {
         boolean result = false;
         for (Promozione elemento : promozioni) {
-            if (elemento.getID() == ID) {
+            if (elemento.getNome().equals(nome)) {
                 result = true;
                 break;
             }
