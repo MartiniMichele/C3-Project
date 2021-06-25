@@ -1402,7 +1402,7 @@
       <ColNames>NomeCategoria</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_Categorie_1</UnderlyingIndexName>
     </key>
-    <column id="522" parent="172" name="NomeNegozio">
+    <column id="522" parent="172" name="Negozio">
       <Position>1</Position>
       <DataType>VARCHAR(255)|0s</DataType>
       <NotNull>1</NotNull>
@@ -1414,20 +1414,20 @@
     </column>
     <index id="524" parent="172" name="sqlite_autoindex_CategorieVendute_1">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>NomeNegozio
+      <ColNames>Negozio
 CategorieVendute</ColNames>
       <ColumnCollations>
 </ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="525" parent="172">
-      <ColNames>NomeNegozio
+      <ColNames>Negozio
 CategorieVendute</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_CategorieVendute_1</UnderlyingIndexName>
     </key>
     <foreign-key id="526" parent="172">
-      <ColNames>NomeNegozio</ColNames>
+      <ColNames>Negozio</ColNames>
       <RefTableName>Vetrina</RefTableName>
       <RefColNames>NomeNegozio</RefColNames>
     </foreign-key>
@@ -1487,7 +1487,7 @@ CategorieVendute</ColNames>
       <DataType>STRING(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="538" parent="174" name="NomeNegozio">
+    <column id="538" parent="174" name="NomeNegozioAssociato">
       <Position>2</Position>
       <DataType>STRING(255)|0s</DataType>
       <NotNull>1</NotNull>
@@ -1523,7 +1523,7 @@ CategorieVendute</ColNames>
       <RefColNames>username</RefColNames>
     </foreign-key>
     <foreign-key id="545" parent="174">
-      <ColNames>NomeNegozio</ColNames>
+      <ColNames>NomeNegozioAssociato</ColNames>
       <RefTableName>Negozio</RefTableName>
       <RefColNames>Vetrina</RefColNames>
     </foreign-key>
@@ -1790,77 +1790,91 @@ IdPacco</ColNames>
       <RefTableName>Vetrina</RefTableName>
       <RefColNames>NomeNegozio</RefColNames>
     </foreign-key>
-    <column id="598" parent="182" name="ID">
+    <foreign-key id="598" parent="181">
+      <ColNames>Responsabile</ColNames>
+      <RefTableName>Responsabile</RefTableName>
+      <RefColNames>UsernameResponsabile</RefColNames>
+    </foreign-key>
+    <column id="599" parent="182" name="ID">
       <Position>1</Position>
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="599" parent="182" name="UsernameCorriere">
+    <column id="600" parent="182" name="UsernameCorriere">
       <Position>2</Position>
       <DataType>VARCHAR(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="600" parent="182" name="IndirizzoDiConsegna">
+    <column id="601" parent="182" name="IndirizzoDiConsegna">
       <Position>3</Position>
       <DataType>VARCHAR(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="601" parent="182" name="TempoDiArrivoStimato">
+    <column id="602" parent="182" name="TempoDiArrivoStimato">
       <Position>4</Position>
       <DataType>TIME(7)|0s</DataType>
     </column>
-    <column id="602" parent="182" name="TipologiaContenuto">
+    <column id="603" parent="182" name="TipologiaContenuto">
       <Position>5</Position>
       <DataType>VARCHAR(32)|0s</DataType>
     </column>
-    <column id="603" parent="182" name="StatoConsegna">
+    <column id="604" parent="182" name="StatoConsegna">
       <Position>6</Position>
       <DataType>VARCHAR(32)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="604" parent="182" name="sqlite_autoindex_Pacco_1">
+    <column id="605" parent="182" name="Cliente">
+      <Position>7</Position>
+      <DataType>VARCHAR(255)|0s</DataType>
+    </column>
+    <index id="606" parent="182" name="sqlite_autoindex_Pacco_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="605" parent="182">
+    <key id="607" parent="182">
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_Pacco_1</UnderlyingIndexName>
     </key>
-    <key id="606" parent="182">
+    <key id="608" parent="182">
       <ColNames>ID</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_Pacco_1</UnderlyingIndexName>
     </key>
-    <foreign-key id="607" parent="182">
+    <foreign-key id="609" parent="182">
       <ColNames>UsernameCorriere</ColNames>
       <RefTableName>Corriere</RefTableName>
       <RefColNames>UsernameCorriere</RefColNames>
     </foreign-key>
-    <foreign-key id="608" parent="182">
+    <foreign-key id="610" parent="182">
       <ColNames>TipologiaContenuto</ColNames>
       <RefTableName>TipologiaContenuto</RefTableName>
       <RefColNames>Tipologia</RefColNames>
     </foreign-key>
-    <foreign-key id="609" parent="182">
+    <foreign-key id="611" parent="182">
       <ColNames>StatoConsegna</ColNames>
       <RefTableName>StatoConsegna</RefTableName>
       <RefColNames>Stato</RefColNames>
     </foreign-key>
-    <column id="610" parent="183" name="UsernameCliente">
+    <foreign-key id="612" parent="182">
+      <ColNames>Cliente</ColNames>
+      <RefTableName>Cliente</RefTableName>
+      <RefColNames>Username</RefColNames>
+    </foreign-key>
+    <column id="613" parent="183" name="UsernameCliente">
       <Position>1</Position>
       <DataType>VARCHAR(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="611" parent="183" name="NomeNegozio">
+    <column id="614" parent="183" name="NomeNegozio">
       <Position>2</Position>
       <DataType>VARCHAR(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="612" parent="183" name="sqlite_autoindex_Preferiti_1">
+    <index id="615" parent="183" name="sqlite_autoindex_Preferiti_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>UsernameCliente
 NomeNegozio</ColNames>
@@ -1868,38 +1882,38 @@ NomeNegozio</ColNames>
 </ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="613" parent="183">
+    <key id="616" parent="183">
       <ColNames>UsernameCliente
 NomeNegozio</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_Preferiti_1</UnderlyingIndexName>
     </key>
-    <foreign-key id="614" parent="183">
+    <foreign-key id="617" parent="183">
       <ColNames>UsernameCliente</ColNames>
       <RefTableName>Cliente</RefTableName>
       <RefColNames>Username</RefColNames>
     </foreign-key>
-    <foreign-key id="615" parent="183">
+    <foreign-key id="618" parent="183">
       <ColNames>NomeNegozio</ColNames>
       <RefTableName>Vetrina</RefTableName>
       <RefColNames>NomeNegozio</RefColNames>
     </foreign-key>
-    <column id="616" parent="184" name="Negozio">
+    <column id="619" parent="184" name="Negozio">
       <Position>1</Position>
       <DataType>VARCHAR(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="617" parent="184" name="NomePromozione">
+    <column id="620" parent="184" name="NomePromozione">
       <Position>2</Position>
       <DataType>VARCHAR(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="618" parent="184" name="PuntiBonus">
+    <column id="621" parent="184" name="PuntiBonus">
       <Position>3</Position>
       <DataType>DOUBLE(10)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="619" parent="184" name="sqlite_autoindex_Promozioni_3">
+    <index id="622" parent="184" name="sqlite_autoindex_Promozioni_3">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Negozio
 NomePromozione</ColNames>
@@ -1907,190 +1921,190 @@ NomePromozione</ColNames>
 </ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <index id="620" parent="184" name="sqlite_autoindex_Promozioni_1">
+    <index id="623" parent="184" name="sqlite_autoindex_Promozioni_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Negozio</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <index id="621" parent="184" name="sqlite_autoindex_Promozioni_2">
+    <index id="624" parent="184" name="sqlite_autoindex_Promozioni_2">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>NomePromozione</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="622" parent="184">
+    <key id="625" parent="184">
       <ColNames>Negozio
 NomePromozione</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_Promozioni_3</UnderlyingIndexName>
     </key>
-    <key id="623" parent="184">
+    <key id="626" parent="184">
       <ColNames>Negozio</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_Promozioni_3</UnderlyingIndexName>
     </key>
-    <key id="624" parent="184">
+    <key id="627" parent="184">
       <ColNames>NomePromozione</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_Promozioni_2</UnderlyingIndexName>
     </key>
-    <foreign-key id="625" parent="184">
+    <foreign-key id="628" parent="184">
       <ColNames>Negozio</ColNames>
       <RefTableName>Vetrina</RefTableName>
       <RefColNames>NomeNegozio</RefColNames>
     </foreign-key>
-    <column id="626" parent="185" name="UsernameResponsabile">
+    <column id="629" parent="185" name="UsernameResponsabile">
       <Position>1</Position>
       <DataType>VARCHAR(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="627" parent="185" name="Nome">
+    <column id="630" parent="185" name="Nome">
       <Position>2</Position>
       <DataType>VARCHAR(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="628" parent="185" name="Cognome">
+    <column id="631" parent="185" name="Cognome">
       <Position>3</Position>
       <DataType>VARCHAR(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="629" parent="185" name="sqlite_autoindex_Responsabile_1">
+    <index id="632" parent="185" name="sqlite_autoindex_Responsabile_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>UsernameResponsabile</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="630" parent="185">
+    <key id="633" parent="185">
       <ColNames>UsernameResponsabile</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_Responsabile_1</UnderlyingIndexName>
     </key>
-    <key id="631" parent="185">
+    <key id="634" parent="185">
       <ColNames>UsernameResponsabile</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_Responsabile_1</UnderlyingIndexName>
     </key>
-    <foreign-key id="632" parent="185">
+    <foreign-key id="635" parent="185">
       <ColNames>UsernameResponsabile</ColNames>
       <RefTableName>Account</RefTableName>
       <RefColNames>username</RefColNames>
     </foreign-key>
-    <column id="633" parent="186" name="Stato">
+    <column id="636" parent="186" name="Stato">
       <Position>1</Position>
       <DataType>VARCHAR(32)|0s</DataType>
     </column>
-    <index id="634" parent="186" name="sqlite_autoindex_StatoConsegna_1">
+    <index id="637" parent="186" name="sqlite_autoindex_StatoConsegna_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Stato</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="635" parent="186">
+    <key id="638" parent="186">
       <ColNames>Stato</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_StatoConsegna_1</UnderlyingIndexName>
     </key>
-    <column id="636" parent="187" name="Stato">
+    <column id="639" parent="187" name="Stato">
       <Position>1</Position>
       <DataType>VARCHAR(32)|0s</DataType>
     </column>
-    <column id="637" parent="188" name="Tipologia">
+    <column id="640" parent="188" name="Tipologia">
       <Position>1</Position>
       <DataType>VARCHAR(55)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="638" parent="188" name="sqlite_autoindex_TipologiaContenuto_1">
+    <index id="641" parent="188" name="sqlite_autoindex_TipologiaContenuto_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Tipologia</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="639" parent="188">
+    <key id="642" parent="188">
       <ColNames>Tipologia</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_TipologiaContenuto_1</UnderlyingIndexName>
     </key>
-    <key id="640" parent="188">
+    <key id="643" parent="188">
       <ColNames>Tipologia</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_TipologiaContenuto_1</UnderlyingIndexName>
     </key>
-    <column id="641" parent="189" name="Tipologia">
+    <column id="644" parent="189" name="Tipologia">
       <Position>1</Position>
       <DataType>STRING(32)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="642" parent="189" name="sqlite_autoindex_TipologiaCorriere_1">
+    <index id="645" parent="189" name="sqlite_autoindex_TipologiaCorriere_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Tipologia</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="643" parent="189">
+    <key id="646" parent="189">
       <ColNames>Tipologia</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_TipologiaCorriere_1</UnderlyingIndexName>
     </key>
-    <key id="644" parent="189">
+    <key id="647" parent="189">
       <ColNames>Tipologia</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_TipologiaCorriere_1</UnderlyingIndexName>
     </key>
-    <column id="645" parent="190" name="NomeNegozio">
+    <column id="648" parent="190" name="NomeNegozio">
       <Position>1</Position>
       <DataType>VARCHAR(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="646" parent="190" name="Indirizzo">
+    <column id="649" parent="190" name="Indirizzo">
       <Position>2</Position>
       <DataType>VARCHAR(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="647" parent="190" name="Tipologia">
+    <column id="650" parent="190" name="Tipologia">
       <Position>3</Position>
       <DataType>VARCHAR(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="648" parent="190" name="Contatto">
+    <column id="651" parent="190" name="Contatto">
       <Position>4</Position>
       <DataType>NUMERIC(10)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="649" parent="190" name="sqlite_autoindex_Vetrina_1">
+    <index id="652" parent="190" name="sqlite_autoindex_Vetrina_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>NomeNegozio</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="650" parent="190">
+    <key id="653" parent="190">
       <ColNames>NomeNegozio</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_Vetrina_1</UnderlyingIndexName>
     </key>
-    <key id="651" parent="190">
+    <key id="654" parent="190">
       <ColNames>NomeNegozio</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_Vetrina_1</UnderlyingIndexName>
     </key>
-    <column id="652" parent="191" name="type">
+    <column id="655" parent="191" name="type">
       <Position>1</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="653" parent="191" name="name">
+    <column id="656" parent="191" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="654" parent="191" name="tbl_name">
+    <column id="657" parent="191" name="tbl_name">
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="655" parent="191" name="rootpage">
+    <column id="658" parent="191" name="rootpage">
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="656" parent="191" name="sql">
+    <column id="659" parent="191" name="sql">
       <Position>5</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="657" parent="192" name="name">
+    <column id="660" parent="192" name="name">
       <Position>1</Position>
     </column>
-    <column id="658" parent="192" name="seq">
+    <column id="661" parent="192" name="seq">
       <Position>2</Position>
     </column>
   </database-model>

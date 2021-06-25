@@ -54,7 +54,8 @@ public class LoginController {
                     Scene homeClienteScene = new Scene(homeClienteParent);
 
                     HomeClienteController controller = loader.getController();
-                    controller.populate();
+                    controller.populatePacchi(usernameField.getText());
+                    controller.populateNegozi();
 
                     Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
                     window.setScene(homeClienteScene);
@@ -126,9 +127,5 @@ public class LoginController {
         alert.setTitle("LOGIN MESSAGE");
         alert.setHeaderText(str + "!");
         alert.showAndWait();
-    }
-
-    public void loadData(){
-
     }
 }

@@ -22,10 +22,9 @@
          <children>
             <TableView fx:id="tracciaPaccoTableView" prefHeight="201.0" prefWidth="790.0">
               <columns>
-                <TableColumn fx:id="idTableColumn" prefWidth="190.0" text="ID" />
-                <TableColumn fx:id="corriereTableColumn" prefWidth="200.0" text="Corriere" />
-                  <TableColumn fx:id="tempoArrivoTableColumn" prefWidth="212.0" text="Tempo di arrivo" />
-                  <TableColumn fx:id="statoTableColumn" prefWidth="184.0" text="Stato Pacco" />
+                <TableColumn fx:id="idTableColumn" prefWidth="265.0" text="ID" />
+                  <TableColumn fx:id="tempoArrivoTableColumn" prefWidth="260.0" text="Tempo di arrivo" />
+                  <TableColumn fx:id="statoTableColumn" prefWidth="264.0" text="Stato Pacco" />
               </columns>
                <VBox.margin>
                   <Insets left="5.0" right="5.0" />
@@ -77,6 +76,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="333.0" prefWidth="202.0">
                      <children>
+                        <AnchorPane prefHeight="140.0" prefWidth="202.0" />
                         <TextField fx:id="statoTextField">
                            <VBox.margin>
                               <Insets left="5.0" right="5.0" />
@@ -87,6 +87,14 @@
                               <Insets top="20.0" />
                            </VBox.margin>
                         </Button>
+                        <AnchorPane prefHeight="139.0" prefWidth="202.0">
+                           <children>
+                              <Button layoutX="122.0" layoutY="92.0" mnemonicParsing="false" onAction="#homeButtonPushed" text="Torna alla Home" />
+                           </children>
+                           <VBox.margin>
+                              <Insets right="5.0" />
+                           </VBox.margin>
+                        </AnchorPane>
                      </children>
                   </VBox>
                </children>

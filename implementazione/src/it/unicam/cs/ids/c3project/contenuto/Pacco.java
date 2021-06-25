@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class Pacco {
     private int ID;
-    private int corriereID;
+    private String usernameCorriere;
     private String indirizzoDiConsegna;
     private LocalTime tempoDiArrivoStimato;
     private TipologiaContenuto contenuto;
@@ -17,9 +17,9 @@ public class Pacco {
     private StatoPacco statoPacco;
     private String cliente;
 
-    public Pacco(int ID, int corriereID,String indirizzoDiConsegna, LocalTime tempoDiArrivoStimato, TipologiaContenuto contenuto, List<String> articoli, StatoPacco statoPacco, String cliente) {
+    public Pacco(int ID, String usernameCorriere,String indirizzoDiConsegna, LocalTime tempoDiArrivoStimato, TipologiaContenuto contenuto, List<String> articoli, StatoPacco statoPacco, String cliente) {
         this.ID = ID;
-        this.corriereID = corriereID;
+        this.usernameCorriere = usernameCorriere;
         this.indirizzoDiConsegna=indirizzoDiConsegna;
         this.tempoDiArrivoStimato = tempoDiArrivoStimato;
         this.contenuto = contenuto;
@@ -36,12 +36,12 @@ public class Pacco {
         this.ID = ID;
     }
 
-    public int getCorriereID() {
-        return corriereID;
+    public String getusernameCorriere() {
+        return usernameCorriere;
     }
 
-    public void setCorriereID(int corriereID) {
-        this.corriereID = corriereID;
+    public void setusernameCorriere(String usernameCorriere) {
+        this.usernameCorriere = usernameCorriere;
     }
 
     public String getIndirizzoDiConsegna() {
@@ -105,7 +105,7 @@ public class Pacco {
     public String toString() {
         return "Pacco{" +
                 "ID=" + ID +
-                ", corriereID=" + corriereID +
+                ", usernameCorriere=" + usernameCorriere +
                 ", tempoDiArrivoStimato=" + tempoDiArrivoStimato +
                 ", statoPacco=" + statoPacco +
                 '}';

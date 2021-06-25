@@ -11,19 +11,15 @@ import java.util.Objects;
  */
 public class Negozio {
 
-    private int id;
     private Responsabile responsabile;
     private Vetrina vetrina;
     private List<Personale> personale;
 
    public Negozio(Responsabile responsabile, List<Personale> personale ) {
-        this.responsabile = obtainResponsabile(personale);
+        this.responsabile = responsabile;
         this.personale = personale;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public Vetrina getVetrina() {
         return vetrina;
@@ -46,19 +42,6 @@ public class Negozio {
     public void addPersonale(Personale personale) {
         this.personale.add(personale);
     }
-
- /*   public List<Promozione> getPromozioni() {
-        return promozioni;
-    }
-
-    public void addPromozione(Promozione promozione) {
-
-        if (!promozioneDuplicata(promozione.getID()))
-        this.promozioni.add(promozione);
-
-        else throw new IllegalArgumentException();
-    }*/
-
 
 
     /**
@@ -104,11 +87,11 @@ public class Negozio {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Negozio negozio = (Negozio) o;
-        return id == negozio.id;
+        return getResponsabile().equals(negozio.getResponsabile()) && Objects.equals(getPersonale(), negozio.getPersonale());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(getResponsabile(), getPersonale());
     }
 }

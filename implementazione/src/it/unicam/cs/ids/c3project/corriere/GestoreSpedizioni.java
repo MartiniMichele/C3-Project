@@ -28,8 +28,9 @@ public class GestoreSpedizioni {
      * Crea un nuovo Pacco
      * @return
      */
-    public boolean creaPacco(int ID, int corriereID,String indirizzo, LocalTime tempoDiArrivoStimato, TipologiaContenuto contenuto, List<String> articoli, StatoPacco statoPacco,String cliente) {
-        Pacco pacco=new Pacco(generaID(),corriereID, indirizzo,tempoDiArrivoStimato,contenuto,articoli,statoPacco, cliente);
+    public boolean creaPacco(int ID, String usernameCorriere,String indirizzo, LocalTime tempoDiArrivoStimato, TipologiaContenuto contenuto, List<String> articoli, StatoPacco statoPacco,String cliente)
+    {
+        Pacco pacco=new Pacco(ID,usernameCorriere, indirizzo,tempoDiArrivoStimato,contenuto,articoli,statoPacco, cliente);
         pacchiDaConsegnare.add(pacco);
         return pacchiDaConsegnare.contains(pacco);
     }

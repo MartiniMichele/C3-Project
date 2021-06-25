@@ -125,15 +125,16 @@ public class GestoreNegozio{
         boolean flag = negozioEsistente(nome);
         if (!flag) {
             Negozio negozio = new Negozio(responsabile, personale);
-            negozio.creaVetrina(nome, tipologia,indirizzo,contatto, categorie);
+            negozio.creaVetrina(nome, tipologia, indirizzo, contatto, categorie);
             negozi.add(negozio);
             vetrine.add(negozio.getVetrina());
         }
-        else throw new IllegalArgumentException("negozio già presente");
 
-
-        return !flag;
+        return true;
     }
+
+
+
 
     /**
      * metodo di supporto per cercare un negozio tramite il nome nella lista dei negozi

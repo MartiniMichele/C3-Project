@@ -5,12 +5,19 @@ import it.unicam.cs.ids.c3project.negozio.Promozione;
 import it.unicam.cs.ids.c3project.negozio.Vetrina;
 import it.unicam.cs.ids.c3project.personale.Personale;
 import it.unicam.cs.ids.c3project.personale.Responsabile;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -79,6 +86,26 @@ public class GestioneVetrinaController {
 
         gestore.rimuoviCategoria(categoria, gestore.searchVetrina(predicate).get(0).getNome());
         updateListView();
+    }
+
+    public void homeButtonPushed(ActionEvent event) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/HomeResponsabile.fxml"));
+            Parent homeResponsabileParent = loader.load();
+            Scene homeResponsabileScene = new Scene(homeResponsabileParent);
+
+            HomeResponsabileController controller = loader.getController();
+
+            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            window.setScene(homeResponsabileScene);
+            window.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            launchError("errore nel caricamento del file");
+        }
     }
 
     public void avviaPromozioneButtonPushed(){
