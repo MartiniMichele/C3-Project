@@ -1590,7 +1590,7 @@ IdPacco</ColNames>
     <column id="558" parent="177" name="Stato">
       <Position>3</Position>
       <DataType>BOOLEAN|0s</DataType>
-      <DefaultExpression>FALSE</DefaultExpression>
+      <DefaultExpression>0</DefaultExpression>
     </column>
     <column id="559" parent="177" name="Tariffa">
       <Position>4</Position>
@@ -1635,7 +1635,7 @@ IdPacco</ColNames>
     </column>
     <column id="567" parent="178" name="NumeroCarta">
       <Position>3</Position>
-      <DataType>NUMERIC(0,19 digit)|0s</DataType>
+      <DataType>VARCHAR(19)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <index id="568" parent="178" name="sqlite_autoindex_FidelityCard_1">
@@ -1809,7 +1809,7 @@ IdPacco</ColNames>
     </column>
     <column id="601" parent="182" name="TempoDiArrivoStimato">
       <Position>4</Position>
-      <DataType>DATETIME(7)|0s</DataType>
+      <DataType>TIME(7)|0s</DataType>
     </column>
     <column id="602" parent="182" name="TipologiaContenuto">
       <Position>5</Position>
