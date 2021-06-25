@@ -20,13 +20,7 @@ public class GestioneVetrinaController {
     //TODO CORREGGERE INIT ELEMENTS
 
     GestoreNegozio gestore = GestoreNegozio.getInstance();
-
-    Responsabile resp = new Responsabile("Enrico");
-    List<Personale> pers = new ArrayList<>();
-    List<Promozione> promo = new ArrayList<>();
-    List<String> cat = new ArrayList<>();
-    List<Promozione> promo2 = new ArrayList<>();
-    List<String> cat2 = new ArrayList<>();
+    String negozio;
 
     @FXML
     ListView<String> categorieListView;
@@ -67,7 +61,7 @@ public class GestioneVetrinaController {
         String categoria = nuovaCategoriaTextField.getText();
         String negozio = negozioTextField.getText();
 
-        if (!nuovaCategoriaTextField.getText().isBlank() && !negozioTextField.getText().isBlank()) {
+        if (!categoria.isBlank() && !negozio.isBlank()) {
             gestore.aggiungiCategoria(categoria, negozio);
             updateListView();
             launchMessage("categoria aggiunta");
@@ -93,8 +87,7 @@ public class GestioneVetrinaController {
         String negozio = negozioPromozioneTextField.getText();
         String puntiStr = puntiPromozioneTextField.getText();
 
-
-        if (!nomePromozioneTextField.getText().isBlank() && !negozioPromozioneTextField.getText().isBlank() && !puntiPromozioneTextField.getText().isBlank()) {
+        if (!nome.isBlank() && !negozio.isBlank() && !puntiStr.isBlank()) {
             int punti = 0;
             try {
                 punti = Integer.parseInt(puntiStr);
@@ -102,13 +95,10 @@ public class GestioneVetrinaController {
             catch (NumberFormatException e) {
                 launchError("si è verificato un errore, riprovare");
             }
-
-
             gestore.avviaPromozione(nome, negozio, punti);
             updateListView();
             launchMessage("promozione aggiunta");
         }
-
         else launchError("uno dei campi è vuoto");
 
     }
@@ -119,6 +109,7 @@ public class GestioneVetrinaController {
 
         gestore.rimuoviPromozione(promo);
         updateListView();
+        launchMessage("promozione rimossa");
     }
 
     public void launchError(String str) {
@@ -143,23 +134,15 @@ public class GestioneVetrinaController {
 
     private void updateListView() {
         categorieListView.getItems().clear();
-        categorieListView.getItems().addAll(gestore.getAllCategorie());
+        categorieListView.getItems().addAll(gestore.getCategorie(negozio));
 
         promozioniListView.getItems().clear();
-        promozioniListView.getItems().addAll(gestore.getAllPromozioni());
+        promozioniListView.getItems().addAll(gestore.getPromozioni(negozio));
+
     }
 
     private void initElements() {
-        pers.add(resp);
-        cat.add("pizza");
-        cat.add("pane");
 
-        cat2.add("chiodi");
-        cat2.add("martello");
-
-        gestore.creaNegozio("Pizzeria Gigi", "via Cassettoni", "Pizzeria", resp, pers, cat, "333666555888");
-        gestore.creaNegozio("Ferramenta Franco", "via Giuseppe", "Ferramenta", resp, pers, cat2, "333666555888");
-        gestore.avviaPromozione("3x2", "Ferramenta Franco", 30);
     }
 
 

@@ -87,10 +87,15 @@ public class GestoreNegozio{
     public List<Promozione> getAllPromozioni() {
         List<Promozione> promozioni = new ArrayList<>();
         for (Vetrina vetrina : vetrine) {
-            //if(!promozioni.contains(promozione))
             promozioni.addAll(vetrina.getPromozioni());
         }
         return promozioni;
+    }
+
+    public List<Promozione> getPromozioni(String vetrina) {
+        Predicate<Vetrina> predicate = p -> p.getNome().equals(vetrina);
+        Vetrina istanzaNegozio = searchVetrina(predicate).get(0);
+        return istanzaNegozio.getPromozioni();
     }
 
     public boolean avviaPromozione(String nomePromozione, String negozio, int puntiBonus) {

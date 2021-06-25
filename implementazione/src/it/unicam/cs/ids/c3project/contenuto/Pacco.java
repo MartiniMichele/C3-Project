@@ -5,6 +5,7 @@ import it.unicam.cs.ids.c3project.corriere.TipologiaContenuto;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Objects;
 
 public class Pacco {
     private int ID;
@@ -12,19 +13,19 @@ public class Pacco {
     private String indirizzoDiConsegna;
     private LocalTime tempoDiArrivoStimato;
     private TipologiaContenuto contenuto;
-    private List<Articolo> articoli;
+    private List<String> articoli;
     private StatoPacco statoPacco;
     private String cliente;
 
-    public Pacco(int ID, int corriereID,String indirizzoDiConsegna, LocalTime tempoDiArrivoStimato, TipologiaContenuto contenuto, List<Articolo> articoli, StatoPacco statoPacco, String cliente) {
-        this.ID=ID;
+    public Pacco(int ID, int corriereID,String indirizzoDiConsegna, LocalTime tempoDiArrivoStimato, TipologiaContenuto contenuto, List<String> articoli, StatoPacco statoPacco, String cliente) {
+        this.ID = ID;
         this.corriereID = corriereID;
         this.indirizzoDiConsegna=indirizzoDiConsegna;
         this.tempoDiArrivoStimato = tempoDiArrivoStimato;
         this.contenuto = contenuto;
         this.articoli = articoli;
         this.statoPacco = statoPacco;
-        this.cliente=cliente;
+        this.cliente = cliente;
     }
 
     public int getID() {
@@ -75,7 +76,7 @@ public class Pacco {
         this.contenuto = contenuto;
     }
 
-    public List<Articolo> getArticoli() {
+    public List<String> getArticoli() {
         return articoli;
     }
 
@@ -85,5 +86,28 @@ public class Pacco {
 
     public void setStatoPacco(StatoPacco statoPacco) {
         this.statoPacco = statoPacco;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pacco pacco = (Pacco) o;
+        return getID() == pacco.getID();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getID());
+    }
+
+    @Override
+    public String toString() {
+        return "Pacco{" +
+                "ID=" + ID +
+                ", corriereID=" + corriereID +
+                ", tempoDiArrivoStimato=" + tempoDiArrivoStimato +
+                ", statoPacco=" + statoPacco +
+                '}';
     }
 }

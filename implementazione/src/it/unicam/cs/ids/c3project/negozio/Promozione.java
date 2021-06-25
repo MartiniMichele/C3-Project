@@ -16,7 +16,7 @@ public class Promozione {
         this.nome = nome;
         this.negozio = nomeNegozio;
         this.puntiBonus = puntiBonus;
-    }
+   }
 
     public String getNome() {
         return nome;
@@ -51,7 +51,7 @@ public class Promozione {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Promozione that = (Promozione) o;
-        return getID() == that.getID();
+        return getNome().equals(that.getNome()) && getNegozio().equals(that.getNegozio());
     }
 
     @Override

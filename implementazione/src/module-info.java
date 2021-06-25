@@ -8,4 +8,5 @@ module C3.Project {
 
     opens it.unicam.cs.ids.c3project.view;
     opens it.unicam.cs.ids.c3project.main;
+    opens it.unicam.cs.ids.c3project.contenuto;
 }

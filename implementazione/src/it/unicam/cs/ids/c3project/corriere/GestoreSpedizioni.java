@@ -28,7 +28,7 @@ public class GestoreSpedizioni {
      * Crea un nuovo Pacco
      * @return
      */
-    public boolean creaPacco(int ID, int corriereID,String indirizzo, LocalTime tempoDiArrivoStimato, TipologiaContenuto contenuto, List<Articolo> articoli, StatoPacco statoPacco,String cliente) {
+    public boolean creaPacco(int ID, int corriereID,String indirizzo, LocalTime tempoDiArrivoStimato, TipologiaContenuto contenuto, List<String> articoli, StatoPacco statoPacco,String cliente) {
         Pacco pacco=new Pacco(generaID(),corriereID, indirizzo,tempoDiArrivoStimato,contenuto,articoli,statoPacco, cliente);
         pacchiDaConsegnare.add(pacco);
         return pacchiDaConsegnare.contains(pacco);
@@ -73,7 +73,7 @@ public class GestoreSpedizioni {
         }
         return 0;
     }
-    public void comunicaDati(int idCorrereScelto, String indirizzo, int idPacco, TipologiaContenuto tipologiaContenuto ){
+    public void comunicaDati(int idCorrereScelto, String indirizzo, int idPacco, TipologiaContenuto tipologiaContenuto ) {
         for (Corriere corriere:listaCorrieri) {
             if(corriere.getID()==idCorrereScelto){
                 for (Pacco pacco:pacchiDaConsegnare) {
@@ -93,7 +93,7 @@ public class GestoreSpedizioni {
     }
 
     public List<Pacco> filtraPacchi(Predicate<Pacco> paccoPredicate){
-        List<Pacco> paccoList=pacchiDaConsegnare;
+        List<Pacco> paccoList = pacchiDaConsegnare;
         paccoList=paccoList.stream().filter(paccoPredicate).collect(Collectors.toList());
         if(paccoList.isEmpty())
             throw new IllegalArgumentException("Non esiste alcun pacco con il criterio inserito");

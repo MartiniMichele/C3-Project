@@ -38,16 +38,7 @@ public class RicercaNegozioController {
     @FXML
     TextField nomeNegozioTextField;
 
-
-
-    //TODO RIMUOVERE
     GestoreNegozio gestore = GestoreNegozio.getInstance();
-    Responsabile resp = new Responsabile("Enrico");
-    List<Personale> pers = new ArrayList<>();
-    List<Promozione> promo = new ArrayList<>();
-    List<String> cat = new ArrayList<>();
-    List<Promozione> promo2 = new ArrayList<>();
-    List<String> cat2 = new ArrayList<>();
 
 
     public void visualizzaPromoButtonPushed() {
@@ -81,15 +72,6 @@ public class RicercaNegozioController {
 
     //TODO CAMBIARE E FARE PER BENE
     private void initElements() {
-        pers.add(resp);
-        cat.add("pizza");
-        cat.add("pane");
 
-        cat2.add("chiodi");
-        cat2.add("martello");
-
-        gestore.creaNegozio("Pizzeria Gigi", "via Cassettoni", "Pizzeria", resp, pers, cat, "333666555888");
-        gestore.creaNegozio("Ferramenta Franco", "via Giuseppe", "Ferramenta", resp, pers, cat2, "333666555888");
-        gestore.avviaPromozione("3x2", "Ferramenta Franco", 30);
     }
 }
