@@ -12,15 +12,16 @@ public class Vetrina {
     private List<Promozione> promozioni;
     private String contatto;
 
-    public Vetrina(String nome,String indirizzo, String tipologia, String contatto, List<String> categoriaProdotti){
+    public Vetrina(String nome,String indirizzo, String tipologia, String contatto){
         this.nome = nome;
         this.indirizzo = indirizzo;
         this.tipologia = tipologia;
         this.contatto = contatto;
-        this.categoriaProdotti = categoriaProdotti;
+        this.categoriaProdotti = new ArrayList<>();
         this.promozioni = new ArrayList<>();
 
     }
+
     public String getNome() {
         return nome;
     }
@@ -74,6 +75,12 @@ public class Vetrina {
             return false;
         this.categoriaProdotti.add(categoria);
         return true;
+    }
+
+    public boolean removeCategoria(String categoria){
+        categoriaProdotti.remove(categoria);
+
+        return categoriaProdotti.contains(categoria);
     }
 
     public void addPromozione(Promozione promozione) {

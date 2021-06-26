@@ -16,6 +16,7 @@ public class GestoreSpedizioni {
     private static GestoreSpedizioni istanzaGestoreSpedizione;
 
 
+    private GestoreSpedizioni() {}
 
     public static GestoreSpedizioni getInstance() {
         if (istanzaGestoreSpedizione == null) istanzaGestoreSpedizione = new GestoreSpedizioni();

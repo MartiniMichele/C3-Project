@@ -1,8 +1,10 @@
 package it.unicam.cs.ids.c3project.view;
 
+import it.unicam.cs.ids.c3project.autenticazione.DatabaseConnection;
 import it.unicam.cs.ids.c3project.negozio.GestoreNegozio;
 import it.unicam.cs.ids.c3project.negozio.Promozione;
 import it.unicam.cs.ids.c3project.negozio.Vetrina;
+import it.unicam.cs.ids.c3project.personale.Commesso;
 import it.unicam.cs.ids.c3project.personale.Personale;
 import it.unicam.cs.ids.c3project.personale.Responsabile;
 import javafx.event.ActionEvent;
@@ -18,14 +20,19 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
 public class GestioneVetrinaController {
 
-    //TODO CORREGGERE INIT ELEMENTS
-
+    private Connection con= DatabaseConnection.ConnectionToDB();
+    private PreparedStatement pst=null;
+    private ResultSet rs=null;
     GestoreNegozio gestore = GestoreNegozio.getInstance();
     String negozio;
 
@@ -70,7 +77,7 @@ public class GestioneVetrinaController {
 
         if (!categoria.isBlank() && !negozio.isBlank()) {
             gestore.aggiungiCategoria(categoria, negozio);
-            updateListView();
+            updateListView(negozio);
             launchMessage("categoria aggiunta");
         }
 
@@ -85,7 +92,7 @@ public class GestioneVetrinaController {
 
 
         gestore.rimuoviCategoria(categoria, gestore.searchVetrina(predicate).get(0).getNome());
-        updateListView();
+        updateListView(negozio);
     }
 
     public void homeButtonPushed(ActionEvent event) {
@@ -123,7 +130,7 @@ public class GestioneVetrinaController {
                 launchError("si è verificato un errore, riprovare");
             }
             gestore.avviaPromozione(nome, negozio, punti);
-            updateListView();
+            updateListView(negozio);
             launchMessage("promozione aggiunta");
         }
         else launchError("uno dei campi è vuoto");
@@ -135,7 +142,7 @@ public class GestioneVetrinaController {
         Promozione promo = promozioniListView.getSelectionModel().getSelectedItem();
 
         gestore.rimuoviPromozione(promo);
-        updateListView();
+        updateListView(negozio);
         launchMessage("promozione rimossa");
     }
 
@@ -154,12 +161,15 @@ public class GestioneVetrinaController {
         alert.showAndWait();
     }
 
-    public void populate() {
-        initElements();
-        updateListView();
+    public void populate(String nome) {
+        negozio = nome;
+        populateNegozi(nome);
+        populateCategorie(nome);
+        populatePromozioni(nome);
+        updateListView(nome);
     }
 
-    private void updateListView() {
+    private void updateListView(String negozio) {
         categorieListView.getItems().clear();
         categorieListView.getItems().addAll(gestore.getCategorie(negozio));
 
@@ -168,9 +178,73 @@ public class GestioneVetrinaController {
 
     }
 
-    private void initElements() {
+    private void populateNegozi(String negozio) {
 
+        String query = "SELECT * FROM Negozio JOIN Vetrina ON Negozio.Vetrina = Vetrina.NomeNegozio JOIN Commesso C ON Negozio.Vetrina = C.NomeNegozioAssociato where Vetrina.NomeNegozio like ?";
+
+
+        try {
+            pst = con.prepareStatement(query);
+            pst.setString(1, negozio);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                gestore.creaNegozio(
+                        rs.getString("NomeNegozio"),
+                        rs.getString("Indirizzo"),
+                        rs.getString("Tipologia"),
+                        new Responsabile(rs.getString("Responsabile")),
+                        Collections.singletonList(new Commesso(rs.getString("UsernameCommesso"))),
+                        rs.getString("Contatto"));
+            }
+
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            launchError("Si è verificato un errore nel popolamento dei negozi");
+        }
     }
+
+    private void populateCategorie(String negozio) {
+        //String query="SELECT * FROM CategorieVendute join Negozio ON Vetrina=Negozio WHERE Responsabile="+responsabile+"";
+        String query="SELECT * from CategorieVendute where Negozio like ?";
+        try {
+            pst = con.prepareStatement(query);
+            pst.setString(1, negozio);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                gestore.aggiungiCategoria(
+                        rs.getString("CategorieVendute"),
+                        rs.getString("Negozio"));
+
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void populatePromozioni(String negozio) {
+        //String query = "SELECT * from Promozioni join Negozio on Vetrina=Promozioni.Negozio where Responsabile="+responsabile+"";
+        String query="SELECT * from Promozioni where Negozio like ?";
+        try {
+            pst=con.prepareStatement(query);
+            pst.setString(1, negozio);
+            rs=pst.executeQuery();
+            while(rs.next()) {
+                gestore.avviaPromozione(
+                        rs.getString("NomePromozione"),
+                        rs.getString("Negozio"),
+                        rs.getInt("PuntiBonus"));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 

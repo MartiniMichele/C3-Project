@@ -64,7 +64,6 @@ public class Promozione {
         return "Promozione" +
                 ":'" + nome + '\'' +
                 ", negozio='" + negozio + '\'' +
-                ", puntiBonus=" + puntiBonus +
-                '}';
+                ", puntiBonus=" + puntiBonus;
     }
 }

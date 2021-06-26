@@ -3,6 +3,7 @@ package it.unicam.cs.ids.c3project.view;
 
 
 import it.unicam.cs.ids.c3project.autenticazione.DatabaseConnection;
+import it.unicam.cs.ids.c3project.negozio.GestoreNegozio;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.security.GeneralSecurityException;
 import java.sql.*;
 
 public class LoginController {
@@ -23,10 +25,9 @@ public class LoginController {
     @FXML
     PasswordField passwordField;
 
-     Connection con=null;
-     PreparedStatement pst=null;
-     ResultSet rs=null;
-
+    private Connection con=null;
+    private PreparedStatement pst=null;
+    private ResultSet rs=null;
 
         @FXML
         public void loginClienteButtonPushed(ActionEvent event) {
@@ -56,6 +57,7 @@ public class LoginController {
                     HomeClienteController controller = loader.getController();
                     controller.populatePacchi(usernameField.getText());
                     controller.populateNegozi();
+                    controller.populateCategorie();
 
                     Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
                     window.setScene(homeClienteScene);
@@ -97,7 +99,7 @@ public class LoginController {
                 Scene homeResponsabileScene = new Scene(homeResponsabileParent);
 
                 HomeResponsabileController controller = loader.getController();
-                controller.populate();
+                controller.initialize(usernameField.getText());
 
                 Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
                 window.setScene(homeResponsabileScene);

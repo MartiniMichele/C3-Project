@@ -25,9 +25,6 @@ import java.util.stream.Collectors;
 
 public class RicercaNegozioController {
 
-    //TODO RIMUOVERE E CORREGGERE "initElements()"
-
-
     @FXML
     ListView<Vetrina> negoziListView;
 
@@ -52,6 +49,7 @@ public class RicercaNegozioController {
     public void visualizzaPromoButtonPushed() {
         Predicate<Vetrina> predicate = p -> p.getPromozioni().size() != 0;
 
+        negoziListView.getItems().clear();
         negoziListView.getItems().addAll(gestore.getvetrine().stream().filter(predicate).collect(Collectors.toList()));
     }
 
@@ -63,6 +61,7 @@ public class RicercaNegozioController {
             categorie.add(tmp);
         }
 
+        categorieListView.getItems().clear();
         categorieListView.getItems().addAll(categorie);
     }
 
@@ -72,6 +71,7 @@ public class RicercaNegozioController {
 
         Predicate<Vetrina> predicate = p -> p.getNome().equals(nome);
 
+        negoziListView.getItems().clear();
         negoziListView.getItems().addAll(gestore.getvetrine().stream().filter(predicate).collect(Collectors.toList()));
     }
 
@@ -104,7 +104,6 @@ public class RicercaNegozioController {
     }
 
 
-    //TODO CAMBIARE E FARE PER BENE
     public void initElements() {
         negoziListView.getItems().addAll(gestore.getvetrine());
     }

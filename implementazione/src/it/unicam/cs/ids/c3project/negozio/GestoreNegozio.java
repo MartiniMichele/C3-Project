@@ -18,6 +18,8 @@ public class GestoreNegozio{
     private static GestoreNegozio istanzaGestore;
 
 
+    private GestoreNegozio() {}
+
     public static GestoreNegozio getInstance() {
         if (istanzaGestore == null) istanzaGestore = new GestoreNegozio();
         return istanzaGestore;
@@ -55,7 +57,7 @@ public class GestoreNegozio{
     public boolean rimuoviCategoria(String categoria,String nomeNegozio) {
         Predicate<Vetrina> predicate = p -> p.getNome().equals(nomeNegozio);
         Vetrina istanzaNegozio = searchVetrina(predicate).get(0);
-        return istanzaNegozio.getCategoriaProdotti().remove(categoria);
+        return istanzaNegozio.removeCategoria(categoria);
     }
 
     /**
@@ -120,17 +122,17 @@ public class GestoreNegozio{
 
 
 
-    public boolean creaNegozio(String nome, String indirizzo, String tipologia, Responsabile responsabile, List<Personale> personale, List<String> categorie, String contatto) {
+    public boolean creaNegozio(String nome, String indirizzo, String tipologia, Responsabile responsabile, List<Personale> personale, String contatto) {
 
         boolean flag = negozioEsistente(nome);
         if (!flag) {
             Negozio negozio = new Negozio(responsabile, personale);
-            negozio.creaVetrina(nome, tipologia, indirizzo, contatto, categorie);
+            negozio.creaVetrina(nome, tipologia, indirizzo, contatto);
             negozi.add(negozio);
             vetrine.add(negozio.getVetrina());
         }
 
-        return true;
+        return flag;
     }
 
 

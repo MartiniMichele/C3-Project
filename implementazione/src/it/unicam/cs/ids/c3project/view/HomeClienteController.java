@@ -1,13 +1,11 @@
 package it.unicam.cs.ids.c3project.view;
 
 import it.unicam.cs.ids.c3project.autenticazione.DatabaseConnection;
-import it.unicam.cs.ids.c3project.contenuto.Pacco;
 import it.unicam.cs.ids.c3project.corriere.GestoreSpedizioni;
 import it.unicam.cs.ids.c3project.corriere.StatoPacco;
 import it.unicam.cs.ids.c3project.corriere.TipologiaContenuto;
 import it.unicam.cs.ids.c3project.negozio.GestoreNegozio;
 import it.unicam.cs.ids.c3project.personale.Commesso;
-import it.unicam.cs.ids.c3project.personale.Personale;
 import it.unicam.cs.ids.c3project.personale.Responsabile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -104,9 +102,10 @@ public class HomeClienteController {
 
     public void populateNegozi() {
         //String query=   "SELECT * FROM Vetrina,Negozio,Commesso,Categorie";
-     //"FUNZIONANTE"       String query="SELECT * FROM(SELECT DISTINCT NomeNegozio,Indirizzo,Tipologia,Responsabile,UsernameCommesso,CategorieVendute,Contatto FROM Vetrina,Negozio,Commesso,CategorieVendute)";
+     //"FUNZIONANTE" String query="SELECT * FROM(SELECT DISTINCT NomeNegozio,Indirizzo,Tipologia,Responsabile,UsernameCommesso,CategorieVendute,Contatto FROM Vetrina,Negozio,Commesso,CategorieVendute)";
      //   String query="SELECT DISTINCT Negozio,Indirizzo,Tipologia,Responsabile,UsernameCommesso,Contatto,CategorieVendute FROM Vetrina,Negozio,Commesso,CategorieVendute";
-        String query="SELECT * FROM(SELECT DISTINCT NomeNegozio,Indirizzo,Tipologia,Responsabile,UsernameCommesso,Contatto FROM Vetrina,Negozio,Commesso)   CategorieVendute FROM CategorieVendute";
+     //   String query="SELECT * FROM(SELECT DISTINCT NomeNegozio,Indirizzo,Tipologia,Responsabile,UsernameCommesso,Contatto FROM Vetrina,Negozio,Commesso)   CategorieVendute FROM CategorieVendute";
+        String query = "SELECT * FROM CategorieVendute left join Vetrina V on V.NomeNegozio = CategorieVendute.Negozio  join Negozio N on V.NomeNegozio = N.Vetrina join Commesso C on N.Vetrina = C.NomeNegozioAssociato";
         try{
             pst=con.prepareStatement(query);
             rs=pst.executeQuery();
@@ -117,12 +116,29 @@ public class HomeClienteController {
                         rs.getString("Tipologia"),
                         new Responsabile(rs.getString("Responsabile")),
                         Collections.singletonList(new Commesso(rs.getString("UsernameCommesso"))),
-                        Collections.singletonList(rs.getString("CategorieVendute")),
                         rs.getString("Contatto"));
             }
         }
         catch (Exception e){
             e.printStackTrace();
+            launchError("Si è verificato un errore nel popolamento dei negozi");
+        }
+    }
+
+    public void populateCategorie() {
+        String query="SELECT * FROM CategorieVendute";
+        try {
+            pst=con.prepareStatement(query);
+            rs=pst.executeQuery();
+            while(rs.next()){
+                gestoreNegozio.aggiungiCategoria(
+                        rs.getString("CategorieVendute"),
+                        rs.getString("Negozio"));
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            launchError("Si è verificato un errore nel popolamento delle categorie");
         }
     }
 }
