@@ -141,4 +141,21 @@ public class HomeClienteController {
             launchError("Si è verificato un errore nel popolamento delle categorie");
         }
     }
+
+    public void populatePromozioni() {
+        String query="SELECT * from Promozioni";
+        try {
+            pst=con.prepareStatement(query);
+            rs=pst.executeQuery();
+            while(rs.next()) {
+                gestoreNegozio.avviaPromozione(
+                        rs.getString("NomePromozione"),
+                        rs.getString("Negozio"),
+                        rs.getInt("PuntiBonus"));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

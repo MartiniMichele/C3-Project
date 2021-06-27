@@ -58,6 +58,7 @@ public class LoginController {
                     controller.populatePacchi(usernameField.getText());
                     controller.populateNegozi();
                     controller.populateCategorie();
+                    controller.populatePromozioni();
 
                     Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
                     window.setScene(homeClienteScene);

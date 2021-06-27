@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,7 +31,7 @@ import java.util.function.Predicate;
 
 public class GestioneVetrinaController {
 
-    private Connection con= DatabaseConnection.ConnectionToDB();
+    private final Connection con= DatabaseConnection.ConnectionToDB();
     private PreparedStatement pst=null;
     private ResultSet rs=null;
     GestoreNegozio gestore = GestoreNegozio.getInstance();
@@ -38,34 +39,26 @@ public class GestioneVetrinaController {
 
     @FXML
     ListView<String> categorieListView;
-
     @FXML
     ListView<Promozione> promozioniListView;
 
     @FXML
     TextField nuovaCategoriaTextField;
-
     @FXML
     TextField negozioTextField;
-
     @FXML
     TextField nomePromozioneTextField;
-
     @FXML
     TextField negozioPromozioneTextField;
-
     @FXML
     TextField puntiPromozioneTextField;
 
     @FXML
     Button nuovaCategoriaButton;
-
     @FXML
     Button rimuoviCategoriaButton;
-
     @FXML
     Button avviaPromozioneButton;
-
     @FXML
     Button rimuoviPromozioneButton;
 
@@ -73,10 +66,31 @@ public class GestioneVetrinaController {
     public void nuovaCategoriaButtonPushed() {
 
         String categoria = nuovaCategoriaTextField.getText();
-        String negozio = negozioTextField.getText();
 
         if (!categoria.isBlank() && !negozio.isBlank()) {
+
+            String query="SELECT NomeCategoria from Categorie WHERE NomeCategoria like ?";
+
+            try {
+
+                pst=con.prepareStatement(query);
+                pst.setString(1,categoria);
+                rs=pst.executeQuery();
+                if (rs.next()) {
+                    salvaCategoriaVenduta();
+                }
+
+                else {
+                    salvaCategoria();
+                    salvaCategoriaVenduta();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
             gestore.aggiungiCategoria(categoria, negozio);
+
             updateListView(negozio);
             launchMessage("categoria aggiunta");
         }
@@ -105,6 +119,7 @@ public class GestioneVetrinaController {
 
             HomeResponsabileController controller = loader.getController();
 
+
             Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
             window.setScene(homeResponsabileScene);
             window.show();
@@ -118,7 +133,6 @@ public class GestioneVetrinaController {
     public void avviaPromozioneButtonPushed(){
 
         String nome = nomePromozioneTextField.getText();
-        String negozio = negozioPromozioneTextField.getText();
         String puntiStr = puntiPromozioneTextField.getText();
 
         if (!nome.isBlank() && !negozio.isBlank() && !puntiStr.isBlank()) {
@@ -207,7 +221,6 @@ public class GestioneVetrinaController {
     }
 
     private void populateCategorie(String negozio) {
-        //String query="SELECT * FROM CategorieVendute join Negozio ON Vetrina=Negozio WHERE Responsabile="+responsabile+"";
         String query="SELECT * from CategorieVendute where Negozio like ?";
         try {
             pst = con.prepareStatement(query);
@@ -227,7 +240,6 @@ public class GestioneVetrinaController {
     }
 
     private void populatePromozioni(String negozio) {
-        //String query = "SELECT * from Promozioni join Negozio on Vetrina=Promozioni.Negozio where Responsabile="+responsabile+"";
         String query="SELECT * from Promozioni where Negozio like ?";
         try {
             pst=con.prepareStatement(query);
@@ -245,8 +257,50 @@ public class GestioneVetrinaController {
         }
     }
 
+    private void salvaCategoriaVenduta() {
+        //String query="INSERT into CategorieVendute SELECT NomeNegozio,NomeCategoria from Vetrina, Categorie";
+        String query="INSERT into CategorieVendute (Negozio, CategorieVendute) VALUES (?,?)";
+        try {
+            pst=con.prepareStatement(query);
+            pst.setString(1, negozio);
+            pst.setString(2, nuovaCategoriaTextField.getText());
+            pst.executeUpdate();
+            rs.close();
+            pst.close();
+           // rs=pst.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        finally {
+            try {
 
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
+    private void salvaCategoria() {
+        String query="INSERT INTO Categorie(NomeCategoria, Descrizione) VALUES (?,?)";
+        try {
+            pst=con.prepareStatement(query);
+            pst.setString(1, nuovaCategoriaTextField.getText());
+            pst.setString(2, null);
+            pst.executeUpdate();
+            rs.close();
+            pst.close();
+           // rs=pst.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        finally {
+            try {
+
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
