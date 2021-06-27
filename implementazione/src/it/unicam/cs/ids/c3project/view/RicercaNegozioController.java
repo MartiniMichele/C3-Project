@@ -50,13 +50,13 @@ public class RicercaNegozioController {
         Predicate<Vetrina> predicate = p -> p.getPromozioni().size() != 0;
 
         negoziListView.getItems().clear();
-        negoziListView.getItems().addAll(gestore.getvetrine().stream().filter(predicate).collect(Collectors.toList()));
+        negoziListView.getItems().addAll(gestore.getVetrine().stream().filter(predicate).collect(Collectors.toList()));
     }
 
     public  void visualizzaCategorieButtonPushed() {
         List<String> categorie = new ArrayList<>();
 
-        for (Vetrina elem : gestore.getvetrine()) {
+        for (Vetrina elem : gestore.getVetrine()) {
             String tmp = elem.getNome() + ":" + gestore.getCategorie(elem.getNome());
             categorie.add(tmp);
         }
@@ -72,7 +72,7 @@ public class RicercaNegozioController {
         Predicate<Vetrina> predicate = p -> p.getNome().equals(nome);
 
         negoziListView.getItems().clear();
-        negoziListView.getItems().addAll(gestore.getvetrine().stream().filter(predicate).collect(Collectors.toList()));
+        negoziListView.getItems().addAll(gestore.getVetrine().stream().filter(predicate).collect(Collectors.toList()));
     }
 
     public void homeButtonPushed(ActionEvent event) {
@@ -105,6 +105,6 @@ public class RicercaNegozioController {
 
 
     public void initElements() {
-        negoziListView.getItems().addAll(gestore.getvetrine());
+        negoziListView.getItems().addAll(gestore.getVetrine());
     }
 }

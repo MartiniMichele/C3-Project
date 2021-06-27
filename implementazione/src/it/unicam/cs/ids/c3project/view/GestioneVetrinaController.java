@@ -45,11 +45,7 @@ public class GestioneVetrinaController {
     @FXML
     TextField nuovaCategoriaTextField;
     @FXML
-    TextField negozioTextField;
-    @FXML
     TextField nomePromozioneTextField;
-    @FXML
-    TextField negozioPromozioneTextField;
     @FXML
     TextField puntiPromozioneTextField;
 

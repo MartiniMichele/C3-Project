@@ -33,7 +33,7 @@ public class GestoreNegozio{
         return negozi;
     }
 
-    public List<Vetrina> getvetrine() {
+    public List<Vetrina> getVetrine() {
         return vetrine;
     }
 
