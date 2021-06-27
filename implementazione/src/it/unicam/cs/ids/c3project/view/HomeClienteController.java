@@ -98,6 +98,15 @@ public class HomeClienteController {
             e.printStackTrace();
 
         }
+        finally {
+            try {
+                rs.close();
+                pst.close();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     public void populateNegozi() {
@@ -118,10 +127,20 @@ public class HomeClienteController {
                         Collections.singletonList(new Commesso(rs.getString("UsernameCommesso"))),
                         rs.getString("Contatto"));
             }
+
         }
         catch (Exception e){
             e.printStackTrace();
             launchError("Si è verificato un errore nel popolamento dei negozi");
+        }
+        finally {
+            try {
+                rs.close();
+                pst.close();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
@@ -140,6 +159,15 @@ public class HomeClienteController {
             e.printStackTrace();
             launchError("Si è verificato un errore nel popolamento delle categorie");
         }
+        finally {
+            try {
+                rs.close();
+                pst.close();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     public void populatePromozioni() {
@@ -156,6 +184,15 @@ public class HomeClienteController {
         }
         catch (Exception e) {
             e.printStackTrace();
+        }
+        finally {
+            try {
+                rs.close();
+                pst.close();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 }

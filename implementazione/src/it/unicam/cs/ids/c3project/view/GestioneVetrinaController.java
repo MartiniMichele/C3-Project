@@ -76,14 +76,10 @@ public class GestioneVetrinaController {
                 pst=con.prepareStatement(query);
                 pst.setString(1,categoria);
                 rs=pst.executeQuery();
-                if (rs.next()) {
-                    salvaCategoriaVenduta();
-                }
-
-                else {
+                if (!rs.next()) {
                     salvaCategoria();
-                    salvaCategoriaVenduta();
                 }
+                salvaCategoriaVenduta();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -101,12 +97,13 @@ public class GestioneVetrinaController {
     public void rimuoviCategoriaButtonPushed() {
 
         String categoria = categorieListView.getSelectionModel().getSelectedItem();
-
         Predicate<Vetrina> predicate = p -> p.getCategoriaProdotti().contains(categoria);
 
-
+        rimuoviCategoriaVenduta();
         gestore.rimuoviCategoria(categoria, gestore.searchVetrina(predicate).get(0).getNome());
+
         updateListView(negozio);
+        launchMessage("categoria rimossa");
     }
 
     public void homeButtonPushed(ActionEvent event) {
@@ -118,6 +115,7 @@ public class GestioneVetrinaController {
             Scene homeResponsabileScene = new Scene(homeResponsabileParent);
 
             HomeResponsabileController controller = loader.getController();
+            controller.initialize(getResponsabileAssociato());
 
 
             Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -143,6 +141,8 @@ public class GestioneVetrinaController {
             catch (NumberFormatException e) {
                 launchError("si è verificato un errore, riprovare");
             }
+
+            salvaPromozione();
             gestore.avviaPromozione(nome, negozio, punti);
             updateListView(negozio);
             launchMessage("promozione aggiunta");
@@ -155,7 +155,9 @@ public class GestioneVetrinaController {
 
         Promozione promo = promozioniListView.getSelectionModel().getSelectedItem();
 
+        rimuoviPromozione();
         gestore.rimuoviPromozione(promo);
+
         updateListView(negozio);
         launchMessage("promozione rimossa");
     }
@@ -218,6 +220,15 @@ public class GestioneVetrinaController {
             e.printStackTrace();
             launchError("Si è verificato un errore nel popolamento dei negozi");
         }
+        finally {
+            try {
+                rs.close();
+                pst.close();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     private void populateCategorie(String negozio) {
@@ -226,7 +237,6 @@ public class GestioneVetrinaController {
             pst = con.prepareStatement(query);
             pst.setString(1, negozio);
             rs = pst.executeQuery();
-
             while (rs.next()) {
                 gestore.aggiungiCategoria(
                         rs.getString("CategorieVendute"),
@@ -237,6 +247,16 @@ public class GestioneVetrinaController {
         catch (Exception e){
             e.printStackTrace();
         }
+        finally {
+            try {
+                rs.close();
+                pst.close();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
     }
 
     private void populatePromozioni(String negozio) {
@@ -255,6 +275,15 @@ public class GestioneVetrinaController {
         catch (Exception e) {
             e.printStackTrace();
         }
+        finally {
+            try {
+                rs.close();
+                pst.close();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     private void salvaCategoriaVenduta() {
@@ -265,42 +294,133 @@ public class GestioneVetrinaController {
             pst.setString(1, negozio);
             pst.setString(2, nuovaCategoriaTextField.getText());
             pst.executeUpdate();
-            rs.close();
-            pst.close();
-           // rs=pst.executeQuery();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         finally {
             try {
+                rs.close();
+                pst.close();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
 
-            }catch (Exception e) {
+    private void rimuoviCategoriaVenduta() {
+        String query ="DELETE FROM CategorieVendute WHERE CategorieVendute LIKE ?";
+        String categoria = categorieListView.getSelectionModel().getSelectedItem();
+
+        try {
+            pst=con.prepareStatement(query);
+            pst.setString(1, categoria);
+            pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                rs.close();
+                pst.close();
+            }
+            catch (Exception e){
                 e.printStackTrace();
             }
         }
     }
 
     private void salvaCategoria() {
-        String query="INSERT INTO Categorie(NomeCategoria, Descrizione) VALUES (?,?)";
+        String query="INSERT INTO Categorie(NomeCategoria) VALUES (?)";
         try {
             pst=con.prepareStatement(query);
             pst.setString(1, nuovaCategoriaTextField.getText());
-            pst.setString(2, null);
             pst.executeUpdate();
-            rs.close();
-            pst.close();
-           // rs=pst.executeQuery();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         finally {
             try {
-
-            }catch (Exception e) {
+                rs.close();
+                pst.close();
+            }
+            catch (Exception e){
                 e.printStackTrace();
             }
         }
+    }
+
+
+
+    private void salvaPromozione() {
+        String query="INSERT INTO Promozioni(Negozio, NomePromozione, PuntiBonus) VALUES (?,?,?)";
+        try {
+            pst=con.prepareStatement(query);
+            pst.setString(1,negozio);
+            pst.setString(2,nomePromozioneTextField.getText());
+            pst.setInt(3, Integer.parseInt(puntiPromozioneTextField.getText()));
+            pst.executeUpdate();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                rs.close();
+                pst.close();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+    private void rimuoviPromozione() {
+        String query ="DELETE FROM Promozioni WHERE Promozioni.Negozio LIKE ? AND Promozioni.NomePromozione like ?";
+        String promo = promozioniListView.getSelectionModel().getSelectedItem().getNome();
+
+        try {
+            pst=con.prepareStatement(query);
+            pst.setString(1, negozio);
+            pst.setString(2, promo);
+            pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                rs.close();
+                pst.close();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    private String getResponsabileAssociato() {
+        String responsabileAssociato = null;
+        String query = "SELECT * from Negozio where Negozio.Vetrina like ?";
+        try {
+            pst = con.prepareStatement(query);
+            pst.setString(1, negozio);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                responsabileAssociato = rs.getString("Responsabile");
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                rs.close();
+                pst.close();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return responsabileAssociato;
     }
 }

@@ -8,12 +8,10 @@ import java.util.Objects;
  */
 public class Commesso implements Personale {
 
-    protected static int ID = 0;
     protected String nome;
     boolean isResponsabile;
 
     public Commesso(String nome) {
-        ID++;
         this.nome = nome;
         isResponsabile = false;
     }
@@ -43,11 +41,15 @@ public class Commesso implements Personale {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Commesso commesso = (Commesso) o;
-        return ID == commesso.ID;
+        return isResponsabile == commesso.isResponsabile && nome.equals(commesso.nome);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID);
+        return Objects.hash(nome, isResponsabile);
     }
+
 }
+
+
+

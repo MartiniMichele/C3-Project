@@ -71,7 +71,15 @@ public class LoginController {
                 launchError("Qualcosa e' andato storto, riprova");
                 e.printStackTrace();
             }
-
+            finally {
+                try {
+                    rs.close();
+                    pst.close();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
 
         }
 
@@ -113,8 +121,15 @@ public class LoginController {
             launchError("Qualcosa e' andato storto, riprova");
             e.printStackTrace();
         }
-
-
+        finally {
+            try {
+                rs.close();
+                pst.close();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
         public void launchError(String str) {

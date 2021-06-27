@@ -1,6 +1,5 @@
 package it.unicam.cs.ids.c3project.corriere;
 
-import it.unicam.cs.ids.c3project.contenuto.Articolo;
 import it.unicam.cs.ids.c3project.contenuto.Pacco;
 
 import java.time.LocalTime;
