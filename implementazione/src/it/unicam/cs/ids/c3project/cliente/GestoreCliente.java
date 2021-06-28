@@ -1,15 +1,23 @@
 package it.unicam.cs.ids.c3project.cliente;
 
+import it.unicam.cs.ids.c3project.negozio.GestoreNegozio;
 import it.unicam.cs.ids.c3project.negozio.Negozio;
 
 import java.util.List;
 
-public class GestoreCliente implements GestoreClienteInterface {
+public class GestoreCliente {
 
-    private static List<Cliente> clienti;
+    private List<Cliente> clienti;
+    private static GestoreCliente istanzaGestore;
+
+    private GestoreCliente() {}
+
+    public static GestoreCliente getInstance() {
+        if (istanzaGestore == null) istanzaGestore = new GestoreCliente();
+        return istanzaGestore;
+    }
 
 
-    @Override
     public boolean creaCliente(String username, int saldoPunti, String indirizzo) {
 
         Cliente newCliente = new Cliente(username, saldoPunti, indirizzo);
@@ -18,7 +26,6 @@ public class GestoreCliente implements GestoreClienteInterface {
         return clienti.contains(newCliente);
     }
 
-    @Override
     public boolean usaFidelityPoint(String cliente, int punti) {
 
         Cliente istanzaCliente = searchCliente(cliente);
@@ -28,7 +35,6 @@ public class GestoreCliente implements GestoreClienteInterface {
         return istanzaCliente.getSaldoPunti() < oldPoints;
     }
 
-    @Override
     public boolean assegnaFidelityPoint(String cliente, int punti) {
 
         Cliente istanzaCliente = searchCliente(cliente);
@@ -38,7 +44,6 @@ public class GestoreCliente implements GestoreClienteInterface {
         return istanzaCliente.getSaldoPunti() > oldPoints;
     }
 
-    @Override
     public boolean addPreferiti(String cliente, Negozio negozio) {
 
         Cliente istanzaCliente = searchCliente(cliente);

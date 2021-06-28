@@ -63,20 +63,6 @@ public class Negozio {
         return  (Responsabile) responsabile;
     }
 
-  /*  private boolean promozioneDuplicata(int ID) {
-
-        boolean result = false;
-
-        for (Promozione elemento : promozioni) {
-
-            if (elemento.getID() == ID) {
-                result = true;
-                break;
-            }
-        }
-
-        return  result;
-    }*/
     public void creaVetrina(String nome, String tipologia, String indirizzo, String contatto){
         Vetrina vetrina=new Vetrina(nome, indirizzo, tipologia, contatto);
         this.vetrina=vetrina;

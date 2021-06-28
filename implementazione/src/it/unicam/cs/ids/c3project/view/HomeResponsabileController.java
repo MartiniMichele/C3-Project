@@ -1,13 +1,10 @@
 package it.unicam.cs.ids.c3project.view;
 
-import it.unicam.cs.ids.c3project.autenticazione.DatabaseConnection;
+import it.unicam.cs.ids.c3project.database.DatabaseConnection;
 import it.unicam.cs.ids.c3project.negozio.GestoreNegozio;
-import it.unicam.cs.ids.c3project.personale.Commesso;
-import it.unicam.cs.ids.c3project.personale.Responsabile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,7 +17,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class HomeResponsabileController {

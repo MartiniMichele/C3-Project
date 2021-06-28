@@ -5,18 +5,24 @@ import it.unicam.cs.ids.c3project.contenuto.Pacco;
 import java.util.List;
 
 public class Corriere {
-    private int ID;
+    private String usernameCorriere;
     private TipologiaCorriere tipologiaCorriere;
     private boolean stato;
-    private List<Pacco> carico;
     private double tariffa;
 
-    public int getID() {
-        return ID;
+    public Corriere(String usernameCorriere, TipologiaCorriere tipologiaCorriere, double tariffa) {
+        this.usernameCorriere = usernameCorriere;
+        this.tipologiaCorriere = tipologiaCorriere;
+        this.stato = false;
+        this.tariffa = tariffa;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public String getUsernameCorriere() {
+        return usernameCorriere;
+    }
+
+    public void setUsernameCorriere(String usernameCorriere) {
+        this.usernameCorriere = usernameCorriere;
     }
 
     public TipologiaCorriere getTipologiaCorriere() {
@@ -35,9 +41,6 @@ public class Corriere {
         this.stato = stato;
     }
 
-    public List<Pacco> getCarico() {
-        return carico;
-    }
 
 
     public double getTariffa() {
@@ -55,39 +58,5 @@ public class Corriere {
     public boolean aggiornaStato(){
         return !this.stato;
     }
-    /**
-     * Metodo usato per aggiungere un pacco alla lista dei pacchi
-     * @param pacco
-     * @return
-     */
-    public boolean aggiungiPacco(Pacco pacco){
-        return this.carico.add(pacco);
-    }
-
-    /**
-     * Metodo usato per rimuovere un pacco dalla lista di pacchi
-     * @param pacco
-     * @return
-     */
-    public boolean rimuoviPacco(Pacco pacco){
-       return this.carico.remove(pacco);
-    }
-
-    /**
-     * Metodo usato per aggiornare la tariffa del Corriere
-     * @param tariffa
-     * @return
-     */
-    public double aggiornaTariffa(double tariffa){
-        setTariffa(tariffa);
-        return tariffa;
-    }
-
-    public void ricevereSpedizione(){
-
-    }
-
-
-
 
 }

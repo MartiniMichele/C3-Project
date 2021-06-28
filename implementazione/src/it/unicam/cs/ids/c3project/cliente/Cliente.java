@@ -12,7 +12,6 @@ public class Cliente {
     private int saldoPunti;
     private String indirizzo;
     private List<Negozio> preferiti;
-    private List<Pacco> ordiniEffettuati;
 
 
     public Cliente(String username, int saldoPunti, String indirizzo){
@@ -20,7 +19,6 @@ public class Cliente {
         this.saldoPunti = saldoPunti;
         this.indirizzo = indirizzo;
         this.preferiti=new ArrayList<>();
-        this.ordiniEffettuati=new ArrayList<>();
     }
 
     public String getUsername() {
@@ -59,8 +57,4 @@ public class Cliente {
         return preferiti.contains(negozio);
     }
 
-    public void aggiungiPaccoAtteso(int id){
-
-        //this.ordiniEffettuati.add();
-    }
 }

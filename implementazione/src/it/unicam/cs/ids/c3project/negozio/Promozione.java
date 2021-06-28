@@ -7,12 +7,10 @@ import java.util.Objects;
  */
 public class Promozione {
     private String nome;
-    private static int ID = 0;
     private String negozio;
     private int puntiBonus;
 
    public Promozione(String nome, String nomeNegozio, int puntiBonus) {
-        ID++;
         this.nome = nome;
         this.negozio = nomeNegozio;
         this.puntiBonus = puntiBonus;
@@ -24,10 +22,6 @@ public class Promozione {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public int getID() {
-        return ID;
     }
 
     public String getNegozio() {
@@ -56,7 +50,7 @@ public class Promozione {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getID());
+        return Objects.hash(getNome(), getNegozio());
     }
 
     @Override

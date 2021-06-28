@@ -67,30 +67,12 @@ public class GestoreSpedizioni {
 
 
 
-    public int  contattaCorriere(String indirizzo, TipologiaContenuto contenuto, Corriere corriere, boolean flag) {
+    public String  contattaCorriere(String indirizzo, TipologiaContenuto contenuto, Corriere corriere, boolean flag) {
         if(flag) {
             corriere.aggiornaStato();
-            return corriere.getID();
+            return corriere.getUsernameCorriere();
         }
-        return 0;
-    }
-    public void comunicaDati(int idCorrereScelto, String indirizzo, int idPacco, TipologiaContenuto tipologiaContenuto ) {
-        for (Corriere corriere:listaCorrieri) {
-            if(corriere.getID()==idCorrereScelto){
-                for (Pacco pacco:pacchiDaConsegnare) {
-                    if(pacco.getID()==idPacco)
-                        corriere.aggiungiPacco(pacco);
-                }
-            }
-        }
-    }
-
-    /**
-     * Genera un nuovo ID per il pacco da creare
-     * @return
-     */
-    public int generaID(){
-        return ID++;
+        return null;
     }
 
     public List<Pacco> filtraPacchi(Predicate<Pacco> paccoPredicate){

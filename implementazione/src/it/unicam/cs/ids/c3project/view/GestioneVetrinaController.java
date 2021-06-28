@@ -1,11 +1,10 @@
 package it.unicam.cs.ids.c3project.view;
 
-import it.unicam.cs.ids.c3project.autenticazione.DatabaseConnection;
+import it.unicam.cs.ids.c3project.database.DatabaseConnection;
 import it.unicam.cs.ids.c3project.negozio.GestoreNegozio;
 import it.unicam.cs.ids.c3project.negozio.Promozione;
 import it.unicam.cs.ids.c3project.negozio.Vetrina;
 import it.unicam.cs.ids.c3project.personale.Commesso;
-import it.unicam.cs.ids.c3project.personale.Personale;
 import it.unicam.cs.ids.c3project.personale.Responsabile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,10 +22,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.function.Predicate;
 
 public class GestioneVetrinaController {
