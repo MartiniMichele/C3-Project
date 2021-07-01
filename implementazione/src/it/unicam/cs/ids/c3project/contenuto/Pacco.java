@@ -1,8 +1,5 @@
 package it.unicam.cs.ids.c3project.contenuto;
 
-import it.unicam.cs.ids.c3project.corriere.StatoPacco;
-import it.unicam.cs.ids.c3project.corriere.TipologiaContenuto;
-
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;

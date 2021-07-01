@@ -1,6 +1,8 @@
 package it.unicam.cs.ids.c3project.corriere;
 
 import it.unicam.cs.ids.c3project.contenuto.Pacco;
+import it.unicam.cs.ids.c3project.contenuto.StatoPacco;
+import it.unicam.cs.ids.c3project.contenuto.TipologiaContenuto;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ public class GestoreSpedizioni {
      * Crea un nuovo Pacco
      * @return
      */
-    public boolean creaPacco(int ID, String usernameCorriere,String indirizzo, LocalTime tempoDiArrivoStimato, TipologiaContenuto contenuto, List<String> articoli, StatoPacco statoPacco,String cliente)
+    public boolean creaPacco(int ID, String usernameCorriere, String indirizzo, LocalTime tempoDiArrivoStimato, TipologiaContenuto contenuto, List<String> articoli, StatoPacco statoPacco, String cliente)
     {
         Pacco pacco=new Pacco(ID,usernameCorriere, indirizzo,tempoDiArrivoStimato,contenuto,articoli,statoPacco, cliente);
         pacchiDaConsegnare.add(pacco);

@@ -2,8 +2,8 @@ package it.unicam.cs.ids.c3project.view;
 
 import it.unicam.cs.ids.c3project.database.DatabaseConnection;
 import it.unicam.cs.ids.c3project.corriere.GestoreSpedizioni;
-import it.unicam.cs.ids.c3project.corriere.StatoPacco;
-import it.unicam.cs.ids.c3project.corriere.TipologiaContenuto;
+import it.unicam.cs.ids.c3project.contenuto.StatoPacco;
+import it.unicam.cs.ids.c3project.contenuto.TipologiaContenuto;
 import it.unicam.cs.ids.c3project.negozio.GestoreNegozio;
 import it.unicam.cs.ids.c3project.personale.Commesso;
 import it.unicam.cs.ids.c3project.personale.Responsabile;
@@ -20,7 +20,7 @@ import java.util.Collections;
 
 public class HomeClienteController {
 
-   private Connection con= DatabaseConnection.ConnectionToDB();
+   private Connection con= DatabaseConnection.getConnection();
     private PreparedStatement pst=null;
    private ResultSet rs=null;
    private GestoreSpedizioni gestoreSpedizioni = GestoreSpedizioni.getInstance();

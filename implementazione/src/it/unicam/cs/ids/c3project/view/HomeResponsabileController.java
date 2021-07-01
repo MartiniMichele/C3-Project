@@ -21,7 +21,7 @@ import java.util.List;
 
 public class HomeResponsabileController {
 
-    private Connection con= DatabaseConnection.ConnectionToDB();
+    private Connection con= DatabaseConnection.getConnection();
     private PreparedStatement pst=null;
     private ResultSet rs=null;
     private GestoreNegozio gestoreNegozio = GestoreNegozio.getInstance();

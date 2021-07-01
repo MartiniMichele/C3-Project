@@ -5,16 +5,23 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DatabaseConnection {
+    private static Connection connection;
 
-    public static Connection ConnectionToDB() {
+    private DatabaseConnection() {
         try {
             Class.forName("org.sqlite.JDBC");
-            return DriverManager.getConnection("jdbc:sqlite:AwaDB.db");
-
-        }   catch (Exception e) {
+            String url = "jdbc:sqlite:AwaDB.db";
+            connection = DriverManager.getConnection(url);
+        } catch (Exception e) {
             e.printStackTrace();
-            return null;
         }
+    }
 
+    public static Connection getConnection() {
+        if (connection == null) {
+            new DatabaseConnection();
+        }
+        return connection;
     }
 }
+

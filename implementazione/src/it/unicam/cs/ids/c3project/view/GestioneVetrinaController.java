@@ -19,15 +19,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.Collections;
 import java.util.function.Predicate;
 
 public class GestioneVetrinaController {
 
-    private final Connection con= DatabaseConnection.ConnectionToDB();
+    private final Connection con= DatabaseConnection.getConnection();
     private PreparedStatement pst=null;
     private ResultSet rs=null;
     GestoreNegozio gestore = GestoreNegozio.getInstance();
@@ -55,32 +53,32 @@ public class GestioneVetrinaController {
     Button rimuoviPromozioneButton;
 
 
-    public void nuovaCategoriaButtonPushed() {
+    public void nuovaCategoriaButtonPushed() throws SQLException {
 
         String categoria = nuovaCategoriaTextField.getText();
 
         if (!categoria.isBlank() && !negozio.isBlank()) {
 
-            String query="SELECT NomeCategoria from Categorie WHERE NomeCategoria like ?";
-
-            try {
-
-                pst=con.prepareStatement(query);
-                pst.setString(1,categoria);
-                rs=pst.executeQuery();
-                if (!rs.next()) {
-                    salvaCategoria();
+            String query = "SELECT NomeCategoria from Categorie WHERE NomeCategoria like ?";
+            if (gestore.getAllCategorie().contains(nuovaCategoriaTextField.getText()))
+                launchMessage("Categoria gia' presente");
+            else {
+                try {
+                    pst = con.prepareStatement(query);
+                    pst.setString(1, categoria);
+                    rs = pst.executeQuery();
+                    if (!rs.next()) {
+                        salvaCategoria();
+                    }
+                    salvaCategoriaVenduta();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                salvaCategoriaVenduta();
-            } catch (Exception e) {
-                e.printStackTrace();
+                gestore.aggiungiCategoria(categoria, negozio);
+                updateListView(negozio);
+                launchMessage("categoria aggiunta");
+
             }
-
-
-            gestore.aggiungiCategoria(categoria, negozio);
-
-            updateListView(negozio);
-            launchMessage("categoria aggiunta");
         }
 
         else launchError("uno dei campi è vuoto");

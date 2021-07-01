@@ -2,7 +2,7 @@ package it.unicam.cs.ids.c3project.view;
 
 import it.unicam.cs.ids.c3project.contenuto.Pacco;
 import it.unicam.cs.ids.c3project.corriere.GestoreSpedizioni;
-import it.unicam.cs.ids.c3project.corriere.StatoPacco;
+import it.unicam.cs.ids.c3project.contenuto.StatoPacco;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

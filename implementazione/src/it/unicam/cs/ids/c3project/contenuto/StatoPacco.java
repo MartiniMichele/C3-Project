@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.c3project.corriere;
+package it.unicam.cs.ids.c3project.contenuto;
 
 public enum StatoPacco {
     Non_Partito,

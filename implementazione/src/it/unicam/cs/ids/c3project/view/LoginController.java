@@ -28,7 +28,7 @@ public class LoginController {
 
         @FXML
         public void loginClienteButtonPushed(ActionEvent event) {
-            con= DatabaseConnection.ConnectionToDB();
+            con= DatabaseConnection.getConnection();
 
             if (!usernameField.getText().isBlank() || !usernameField.getText().isBlank())
                 verifyLoginCliente(event);
@@ -82,7 +82,7 @@ public class LoginController {
 
     @FXML
     public void loginResponsabileButtonPushed(ActionEvent event) {
-        con= DatabaseConnection.ConnectionToDB();
+        con= DatabaseConnection.getConnection();
 
         if (!usernameField.getText().isBlank() || !usernameField.getText().isBlank())
             verifyLoginResponsabile(event);
