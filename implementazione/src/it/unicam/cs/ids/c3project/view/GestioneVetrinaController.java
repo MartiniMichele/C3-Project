@@ -25,7 +25,7 @@ import java.util.function.Predicate;
 
 public class GestioneVetrinaController {
 
-    private final Connection con= DatabaseConnection.getConnection();
+    private Connection con= DatabaseConnection.getConnection();
     private PreparedStatement pst=null;
     private ResultSet rs=null;
     GestoreNegozio gestore = GestoreNegozio.getInstance();
@@ -58,7 +58,6 @@ public class GestioneVetrinaController {
         String categoria = nuovaCategoriaTextField.getText();
 
         if (!categoria.isBlank() && !negozio.isBlank()) {
-
             String query = "SELECT NomeCategoria from Categorie WHERE NomeCategoria like ?";
             if (gestore.getAllCategorie().contains(nuovaCategoriaTextField.getText()))
                 launchMessage("Categoria gia' presente");
@@ -204,7 +203,6 @@ public class GestioneVetrinaController {
                         rs.getString("Contatto"));
             }
 
-
         }
         catch (Exception e){
             e.printStackTrace();
@@ -277,7 +275,6 @@ public class GestioneVetrinaController {
     }
 
     private void salvaCategoriaVenduta() {
-        //String query="INSERT into CategorieVendute SELECT NomeNegozio,NomeCategoria from Vetrina, Categorie";
         String query="INSERT into CategorieVendute (Negozio, CategorieVendute) VALUES (?,?)";
         try {
             pst=con.prepareStatement(query);

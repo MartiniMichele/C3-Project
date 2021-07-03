@@ -21,7 +21,7 @@ import java.util.Collections;
 public class HomeClienteController {
 
    private Connection con= DatabaseConnection.getConnection();
-    private PreparedStatement pst=null;
+   private PreparedStatement pst=null;
    private ResultSet rs=null;
    private GestoreSpedizioni gestoreSpedizioni = GestoreSpedizioni.getInstance();
    private GestoreNegozio gestoreNegozio = GestoreNegozio.getInstance();
@@ -108,10 +108,6 @@ public class HomeClienteController {
     }
 
     public void populateNegozi() {
-        //String query=   "SELECT * FROM Vetrina,Negozio,Commesso,Categorie";
-     //"FUNZIONANTE" String query="SELECT * FROM(SELECT DISTINCT NomeNegozio,Indirizzo,Tipologia,Responsabile,UsernameCommesso,CategorieVendute,Contatto FROM Vetrina,Negozio,Commesso,CategorieVendute)";
-     //   String query="SELECT DISTINCT Negozio,Indirizzo,Tipologia,Responsabile,UsernameCommesso,Contatto,CategorieVendute FROM Vetrina,Negozio,Commesso,CategorieVendute";
-     //   String query="SELECT * FROM(SELECT DISTINCT NomeNegozio,Indirizzo,Tipologia,Responsabile,UsernameCommesso,Contatto FROM Vetrina,Negozio,Commesso)   CategorieVendute FROM CategorieVendute";
         String query = "SELECT * FROM CategorieVendute left join Vetrina V on V.NomeNegozio = CategorieVendute.Negozio  join Negozio N on V.NomeNegozio = N.Vetrina join Commesso C on N.Vetrina = C.NomeNegozioAssociato";
         try{
             pst=con.prepareStatement(query);

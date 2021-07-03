@@ -67,7 +67,7 @@ public class TracciaPacchiController {
 
             String usernameCorriere = corriereTextField.getText();
 
-            Predicate<Pacco> predicate = p -> p.getusernameCorriere() == usernameCorriere;
+            Predicate<Pacco> predicate = p -> p.getusernameCorriere().equals(usernameCorriere);
             updateTableView(gestore.filtraPacchi(predicate));
         }
 
